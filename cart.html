@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart | FOLSME International</title>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styless.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .cart-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .cart-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .cart-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      color: #004080;
+      margin-bottom: 10px;
+    }
+
+    .cart-header p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .empty-cart {
+      text-align: center;
+      padding: 80px 20px;
+      background: #f9f9f9;
+      border-radius: 15px;
+      margin: 40px 0;
+    }
+
+    .empty-cart h2 {
+      color: #004080;
+      margin-bottom: 20px;
+    }
+
+    .empty-cart p {
+      color: #666;
+      margin-bottom: 30px;
+    }
+
+    .btn-shop {
+      background: #ff3b30;
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+    }
+
+    .btn-shop:hover {
+      background: #e6352a;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(255, 59, 48, 0.4);
+    }
+
+    .cart-content {
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 40px;
+    }
+
+    .cart-items {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 120px 1fr auto;
+      gap: 20px;
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+      transition: all 0.3s ease;
+      align-items: center;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item:hover {
+      background: #f9f9f9;
+      transform: translateX(5px);
+    }
+
+    .cart-item-image {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .cart-item-details h3 {
+      font-size: 1.2rem;
+      color: #004080;
+      margin-bottom: 5px;
+    }
+
+    .cart-item-details p {
+      color: #666;
+      margin-bottom: 10px;
+    }
+
+    .cart-item-price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ff3b30;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .quantity-btn {
+      background: #f0f0f0;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .quantity-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .quantity-input {
+      width: 50px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 1rem;
+    }
+
+    .remove-btn {
+      background: #ff3b30;
+      color: #fff;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .remove-btn:hover {
+      background: #e6352a;
+    }
+
+    .cart-summary {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+      padding: 30px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .cart-summary h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      color: #004080;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-row:last-child {
+      border-bottom: none;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #ff3b30;
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px solid #ff3b30;
+    }
+
+    .btn-checkout {
+      background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+      color: #fff;
+      padding: 15px 30px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 20px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+      animation: gentlePulse 2s infinite;
+    }
+
+    .btn-checkout::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn-checkout:hover::before {
+      left: 100%;
+    }
+
+    .btn-checkout:hover {
+      background: linear-gradient(135deg, #e6352a 0%, #ff5252 100%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 8px 25px rgba(255, 59, 48, 0.4);
+    }
+
+    .btn-continue {
+      background: #f0f0f0;
+      color: #333;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .btn-continue:hover {
+      background: #e0e0e0;
+      transform: translateY(-1px);
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3); }
+      50% { box-shadow: 0 4px 20px rgba(255, 59, 48, 0.5); }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .cart-content {
+        grid-template-columns: 1fr;
+      }
+
+      .cart-item {
+        grid-template-columns: 80px 1fr;
+        gap: 15px;
+      }
+
+      .cart-item-image {
+        width: 80px;
+        height: 80px;
+      }
+
+      .cart-header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header id="folsme-nav">
+  <div class="folsme-container">
+    <div class="folsme-logo">
+      <img src="images/logo.svg" alt="FOLSME Logo">
+      <span>FOLSME international LTD</span>
+    </div>
+
+    <!-- Hamburger -->
+    <div id="folsme-hamburger" class="folsme-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav id="folsme-menu" class="folsme-menu">
+      <button id="folsme-close" class="folsme-close">&times;</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+
+        <li class="folsme-dropdown">
+          <a href="#" class="folsme-toggle">Services ▾</a>
+          <ul class="folsme-submenu">
+             <li><a href="mining.html">Mining</a></li>
+             <li><a href="energy.html">Magnetic Generators</a></li>
+            <li><a href="construction.html">Construction</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="oilgas.html">Oil & Gas</a></li>
+            <li><a href="trade.html">Trade & Commerce</a></li>
+          </ul>
+        </li>
+
+        <li><a href="generators.html">Generators</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="cart-container">
+  <div class="cart-header">
+    <h1>Shopping Cart</h1>
+    <p>Review your items and proceed to checkout</p>
+  </div>
+
+  <div x-data="cartPage()" x-init="init()">
+    <!-- Empty Cart State -->
+    <div x-show="cartItems.length === 0" class="empty-cart">
+      <h2>Your cart is empty</h2>
+      <p>Add some generators to get started!</p>
+      <a href="generators.html" class="btn-shop">Browse Generators</a>
+    </div>
+
+    <!-- Cart Content -->
+    <div x-show="cartItems.length > 0" class="cart-content">
+      <!-- Cart Items -->
+      <div class="cart-items">
+        <template x-for="(item, index) in cartItems" :key="index">
+          <div class="cart-item">
+            <img :src="item.image" :alt="item.name" class="cart-item-image">
+            <div class="cart-item-details">
+              <h3 x-text="item.name"></h3>
+              <p x-text="item.description"></p>
+              <div class="cart-item-price" x-text="formatCurrency(item.price)"></div>
+              <div class="quantity-controls">
+                <button class="quantity-btn" @click="updateQuantity(index, item.quantity - 1)">-</button>
+                <input type="number" class="quantity-input" x-model="item.quantity" @input="updateQuantity(index, parseInt($event.target.value) || 1)" min="1" max="10">
+                <button class="quantity-btn" @click="updateQuantity(index, item.quantity + 1)">+</button>
+              </div>
+            </div>
+            <div>
+              <div class="cart-item-price" x-text="formatCurrency(item.price * item.quantity)"></div>
+              <button class="remove-btn" @click="removeItem(index)">Remove</button>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal:</span>
+          <span x-text="formatCurrency(subtotal)"></span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping:</span>
+          <span x-text="formatCurrency(shipping)"></span>
+        </div>
+        <div class="summary-row">
+          <span>Total:</span>
+          <span x-text="formatCurrency(total)"></span>
+        </div>
+        <button class="btn-checkout" @click="proceedToCheckout()">Proceed to Checkout</button>
+        <a href="generators.html" class="btn-continue">Continue Shopping</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Contact Info -->
+    <div class="footer-section contact-info">
+      <h4>Contact Us</h4>
+      <p>
+        <a href="tel:+2347035589713" class="footer-link">
+          <img src="images/phone.svg" alt="Phone" /> +234 703 558 9713
+        </a><br>
+        <a href="mailto:folsmeinternational@gmail.com" class="footer-link">
+          <img src="images/email.svg" alt="Email" /> folsmeinternational@gmail.com
+        </a><br>
+        <a href="https://goo.gl/maps/xxxx" target="_blank" class="footer-link">
+          <img src="images/location.svg" alt="Location" /> Head Office: Osogbo | Mining Site: Erio-Ekiti
+        </a>
+      </p>
+    </div>
+
+    <div class="footer-row1">
+      <!-- Navigation Links -->
+      <div class="footer-section footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+          <li><a href="services.html" class="footer-link">Services</a></li>
+          <li><a href="#why-choose-us" class="footer-link">Why Choose Us</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services Links -->
+      <div class="footer-section footer-services">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="services.html#mining" class="footer-link">Mining & Minerals</a></li>
+          <li><a href="energy.html" class="footer-link">Energy & Engineering</a></li>
+          <li><a href="construction.html" class="footer-link">Construction</a></li>
+          <li><a href="logistics.html" class="footer-link">Logistics</a></li>
+          <li><a href="oilgas.html" class="footer-link">Oil & Gas</a></li>
+          <li><a href="trade.html" class="footer-link">Trade & Commerce</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-row2">
+      <!-- Follow Us -->
+      <div class="footer-section footer-extra">
+        <h4>Follow Us</h4>
+        <p class="footer-socials">
+          <a href="https://wa.me/2347035589713" target="_blank" class="footer-link">
+            <img src="images/whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <a href="#" target="_blank" class="footer-link">
+            <img src="images/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="#" target="_blank" class="footer-link">
+            <img src="images/facebook.svg" alt="Facebook" />
+          </a>
+        </p>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-section footer-newsletter-section">
+        <h4>Newsletter</h4>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-note">We respect your privacy. Your data is secure with us.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 FOLSME International. All Rights Reserved. Designed by Seyi Olofin</p>
+  </div>
+</footer>
+
+<script>
+  function cartPage() {
+    return {
+      cartItems: [],
+      shipping: 0,
+
+      init() {
+        // Load cart from localStorage
+        const savedCart = localStorage.getItem('cart');
+        if (savedCart) {
+          this.cartItems = JSON.parse(savedCart);
+        }
+      },
+
+      get subtotal() {
+        return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      },
+
+      get total() {
+        return this.subtotal + this.shipping;
+      },
+
+      updateQuantity(index, newQuantity) {
+        if (newQuantity < 1) newQuantity = 1;
+        if (newQuantity > 10) newQuantity = 10;
+        this.cartItems[index].quantity = newQuantity;
+        this.saveCart();
+        // Force reactivity update for totals
+        this.$nextTick(() => {
+          this.cartItems = [...this.cartItems];
+        });
+      },
+
+      removeItem(index) {
+        this.cartItems.splice(index, 1);
+        this.saveCart();
+      },
+
+      saveCart() {
+        localStorage.setItem('cart', JSON.stringify(this.cartItems));
+      },
+
+      formatCurrency(amount) {
+        return '₦' + amount.toLocaleString();
+      },
+
+      proceedToCheckout() {
+        if (this.cartItems.length === 0) return;
+
+        // Store cart items for checkout
+        localStorage.setItem('checkoutItems', JSON.stringify(this.cartItems));
+
+        // Redirect to checkout
+        window.location.href = 'checkout.html?from=cart';
+      }
+    }
+  }
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("folsme-hamburger");
+  const navMenu = document.getElementById("folsme-menu");
+  const closeBtn = document.getElementById("folsme-close");
+  const dropdownToggles = document.querySelectorAll(".folsme-toggle");
+
+  // === HAMBURGER TOGGLE ===
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+    document.body.classList.toggle("no-scroll", navMenu.classList.contains("active"));
+
+    // 🧹 When menu closes, reset all dropdowns
+    if (!navMenu.classList.contains("active")) {
+      document.querySelectorAll(".folsme-dropdown.open").forEach(d => {
+        d.classList.remove("open");
+        const caret = d.querySelector(".caret");
+        if (caret) caret.classList.remove("rotate");
+      });
+    }
+  });
+
+  // === CLOSE BUTTON ===
+  closeBtn.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+    hamburger.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+
+    // 🧹 Also close all dropdowns
+    document.querySelectorAll(".folsme-dropdown.open").forEach(d => {
+      d.classList.remove("open");
+      const caret = d.querySelector(".caret");
+      if (caret) caret.classList.remove("rotate");
+    });
+  });
+
+  // === DROPDOWN TOGGLE (Mobile Only) ===
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener("click", e => {
+      if (window.innerWidth <= 992) {
+        e.preventDefault();
+        const parent = toggle.closest(".folsme-dropdown");
+        const caret = toggle.querySelector(".caret");
+
+        // Close other open dropdowns before opening new one
+        document.querySelectorAll(".folsme-dropdown.open").forEach(d => {
+          if (d !== parent) {
+            d.classList.remove("open");
+            const otherCaret = d.querySelector(".caret");
+            if (otherCaret) otherCaret.classList.remove("rotate");
+          }
+        });
+
+        // Toggle current dropdown
+        parent.classList.toggle("open");
+        if (caret) caret.classList.toggle("rotate");
+      }
+    });
+  });
+
+  // === ACTIVE LINK HIGHLIGHT ===
+  const current = window.location.pathname.split("/").pop();
+  document.querySelectorAll("#folsme-menu a").forEach(a => {
+    if (a.getAttribute("href") === current) {
+      a.classList.add("active");
+    }
+  });
+});
+
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | FOLSME International</title>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styless.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .checkout-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .checkout-grid {
+      display: grid;
+      grid-template-columns: 1fr 350px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .checkout-form {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      animation: slideInLeft 0.6s ease-out 0.2s both;
+    }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .checkout-form h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #004080;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .checkout-form h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, #ff3b30, #ff6b6b, #ff3b30);
+      background-size: 200% 100%;
+      animation: shimmerBorder 3s infinite;
+    }
+
+    @keyframes shimmerBorder {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+
+    .form-section {
+      margin-bottom: 30px;
+    }
+
+    .form-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #333;
+      border-bottom: 2px solid #ff3b30;
+      padding-bottom: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      background: linear-gradient(135deg, #ffffff 0%, #f9f9f9 100%);
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #ff3b30;
+      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1), 0 4px 12px rgba(255, 59, 48, 0.1);
+      transform: translateY(-2px) scale(1.01);
+      background: #ffffff;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .form-group input:hover,
+    .form-group select:hover {
+      border-color: #ff6b6b;
+    }
+
+    .order-summary {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      height: fit-content;
+      animation: slideInRight 0.6s ease-out 0.4s both;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .order-summary h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      color: #004080;
+    }
+
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .summary-total {
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #ff3b30;
+      border-top: 2px solid #ff3b30;
+      padding-top: 15px;
+      margin-top: 15px;
+    }
+
+    .payment-section {
+      margin-top: 30px;
+    }
+
+    .payment-section h3 {
+      font-size: 1.3rem;
+      margin-bottom: 15px;
+      color: #333;
+    }
+
+    .payment-placeholder {
+      background: #f9f9f9;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .payment-placeholder p {
+      margin-bottom: 15px;
+      color: #666;
+    }
+
+    .btn-pay {
+      background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+      color: #fff;
+      padding: 18px 30px;
+      border: none;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-pay::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .btn-pay:hover::before {
+      left: 100%;
+    }
+
+    .btn-pay:hover {
+      background: linear-gradient(135deg, #e6352a 0%, #ff5252 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 59, 48, 0.4);
+    }
+
+    .btn-pay:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 10px rgba(255, 59, 48, 0.3);
+    }
+
+    .btn-pay:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-pay:disabled::before {
+      display: none;
+    }
+
+    /* Back Navigation */
+    .back-navigation {
+      margin-bottom: 20px;
+    }
+
+    .back-btn {
+      background: #f0f0f0;
+      color: #333;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .back-btn:hover {
+      background: #e0e0e0;
+      transform: translateX(-3px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .back-btn svg {
+      transition: transform 0.3s ease;
+    }
+
+    .back-btn:hover svg {
+      transform: translateX(-2px);
+    }
+
+    /* Cart Icon */
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      color: #004080;
+      transition: color 0.3s ease;
+    }
+
+    .cart-icon:hover {
+      color: #ff3b30;
+    }
+
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ff3b30;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Product Grid */
+    .product-grid {
+      margin-bottom: 40px;
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      border: 1px solid rgba(255,255,255,0.8);
+      backdrop-filter: blur(10px);
+      animation: fadeInScale 0.6s ease-out 0.1s both;
+    }
+
+    @keyframes fadeInScale {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .order-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+
+    .order-icon {
+      background: linear-gradient(135deg, #004080 0%, #0066cc 100%);
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0, 64, 128, 0.3);
+    }
+
+    .order-icon svg {
+      width: 32px;
+      height: 32px;
+    }
+
+    .order-title {
+      text-align: center;
+    }
+
+    .order-title h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.8rem;
+      color: #004080;
+      margin: 0 0 5px 0;
+    }
+
+    .order-title p {
+      color: #666;
+      font-size: 0.95rem;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .products-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      justify-items: center;
+    }
+
+    .product-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      border: 1px solid rgba(255,255,255,0.8);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      width: 100%;
+      max-width: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .product-card:hover::before {
+      left: 100%;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+    }
+
+    .product-image {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .product-name {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #004080;
+      margin-bottom: 10px;
+    }
+
+    .product-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .product-price {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #ff3b30;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .quantity-btn {
+      background: #f0f0f0;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background 0.3s;
+    }
+
+    .quantity-btn:hover {
+      background: #e0e0e0;
+    }
+
+    .quantity-input {
+      width: 50px;
+      text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 5px;
+      font-size: 1rem;
+    }
+
+    .quantity-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .quantity-label {
+      font-size: 0.875rem;
+      color: #666;
+      font-weight: 600;
+    }
+
+    .quantity-value {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #004080;
+    }
+
+    .product-subtotal {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #004080;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* Single product centering */
+    .single-product {
+      display: flex;
+      justify-content: center;
+    }
+
+    .single-product .product-card {
+      max-width: 400px;
+    }
+
+
+    .selected-payment {
+      border-color: #ff3b30 !important;
+      background: linear-gradient(135deg, rgba(255, 59, 48, 0.1) 0%, rgba(255, 107, 107, 0.05) 100%) !important;
+      box-shadow: 0 4px 12px rgba(255, 59, 48, 0.2) !important;
+      transform: scale(1.02) !important;
+    }
+
+    .featured-payment {
+      border-color: #10b981 !important;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%) !important;
+      position: relative;
+    }
+
+    .featured-payment::after {
+      content: '★';
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #10b981;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+    }
+
+    /* Payment Select Styles */
+    #paymentMethod {
+      background-color: #fff !important;
+      font-family: inherit;
+    }
+
+    #paymentMethod:hover {
+      border-color: #ff3b30 !important;
+      box-shadow: 0 4px 12px rgba(255, 59, 48, 0.1) !important;
+    }
+
+    #paymentMethod:focus {
+      outline: none;
+      border-color: #ff3b30 !important;
+      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.1), 0 4px 12px rgba(255, 59, 48, 0.1) !important;
+    }
+
+    /* Custom dropdown arrow */
+    #paymentMethod::-ms-expand {
+      display: none;
+    }
+
+    /* Firefox */
+    #paymentMethod {
+      -moz-appearance: none;
+    }
+
+    /* Webkit browsers */
+    #paymentMethod::-webkit-select {
+      background: transparent;
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 768px) {
+      .checkout-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .checkout-form {
+        padding: 20px;
+      }
+
+      .order-summary {
+        order: -1;
+      }
+
+      .back-btn {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+
+      .product-grid {
+        padding: 20px;
+      }
+
+      .order-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .order-icon {
+        width: 50px;
+        height: 50px;
+      }
+
+      .order-icon svg {
+        width: 28px;
+        height: 28px;
+      }
+
+      .order-title h3 {
+        font-size: 1.5rem;
+      }
+
+      .products-container {
+        grid-template-columns: 1fr;
+      }
+
+      .product-card {
+        max-width: none;
+      }
+
+      .product-details {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+      }
+
+      .quantity-controls {
+        align-self: center;
+      }
+
+      .payment-dropdown-header {
+        padding: 14px 16px !important;
+      }
+
+      .payment-dropdown-options {
+        max-height: 250px !important;
+      }
+
+      .payment-option {
+        padding: 12px 16px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<header id="folsme-nav">
+  <div class="folsme-container">
+    <div class="folsme-logo">
+      <img src="images/logo.svg" alt="FOLSME Logo">
+      <span>FOLSME international LTD</span>
+    </div>
+
+    <!-- Hamburger -->
+    <div id="folsme-hamburger" class="folsme-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav id="folsme-menu" class="folsme-menu">
+      <button id="folsme-close" class="folsme-close">&times;</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+
+        <li class="folsme-dropdown">
+          <a href="#" class="folsme-toggle">Services ▾</a>
+          <ul class="folsme-submenu">
+             <li><a href="mining.html">Mining</a></li>
+             <li><a href="energy.html">Magnetic Generators</a></li>
+            <li><a href="construction.html">Construction</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="oilgas.html">Oil & Gas</a></li>
+            <li><a href="trade.html">Trade & Commerce</a></li>
+          </ul>
+        </li>
+
+        <li><a href="generators.html">Generators</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li class="cart-icon" @click="goToCart()">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z" fill="currentColor"/>
+            <circle cx="9" cy="9" r="1" fill="currentColor"/>
+            <circle cx="15" cy="9" r="1" fill="currentColor"/>
+          </svg>
+          <span class="cart-badge" x-show="cartQuantity > 0" x-text="cartQuantity"></span>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="checkout-container" x-data="checkoutPage()">
+  <!-- Back Button -->
+  <div class="back-navigation">
+    <button class="back-btn" @click="goBack()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+
+       <a href="cart.html"> Back to Cart </a>
+    </button>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="product-grid">
+    <div class="order-header">
+      <div class="order-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z" fill="#004080"/>
+          <circle cx="9" cy="9" r="1" fill="#004080"/>
+          <circle cx="15" cy="9" r="1" fill="#004080"/>
+        </svg>
+      </div>
+      <div class="order-title">
+        <h3>Your Order</h3>
+        <p>Review your selected items before checkout</p>
+      </div>
+    </div>
+    <div class="products-container" :class="{ 'single-product': cartItems.length === 1 }">
+      <template x-for="(item, index) in cartItems" :key="index">
+        <div class="product-card">
+          <img :src="item.image" :alt="item.name" class="product-image">
+          <div class="product-name" x-text="item.name + (item.unit ? ' (' + item.unit + ')' : '')"></div>
+          <div class="product-details">
+            <div class="product-price" x-text="formatCurrency(item.price)"></div>
+            <div class="quantity-controls" x-show="item.type !== 'mineral'">
+              <button class="quantity-btn" @click="updateQuantity(index, item.quantity - 1)">-</button>
+              <input type="number" class="quantity-input" x-model="item.quantity" @input="updateQuantity(index, parseInt($event.target.value) || 1)" min="1" max="10">
+              <button class="quantity-btn" @click="updateQuantity(index, item.quantity + 1)">+</button>
+            </div>
+            <div class="quantity-display" x-show="item.type === 'mineral'">
+              <span class="quantity-label">Quantity:</span>
+              <span class="quantity-value" x-text="item.quantity + ' ' + (item.unit || 'units')"></span>
+            </div>
+          </div>
+          <div class="product-subtotal">
+            Subtotal: <span x-text="formatCurrency(item.price * item.quantity)"></span>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+
+  <div class="checkout-grid">
+    <!-- Checkout Form -->
+    <div class="checkout-form">
+      <h2 x-text="cartItems.some(item => item.type === 'sell_inquiry') ? 'Contact Information' : 'Shipping Address'"></h2>
+
+      <form @submit.prevent="processPayment">
+        <div class="form-section">
+          <h3>Personal Information</h3>
+          <div class="form-group">
+            <label for="fullName">Full Name *</label>
+            <input type="text" id="fullName" x-model="formData.fullName" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" x-model="formData.email" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" x-model="formData.phone" required autocomplete="tel" inputmode="numeric" pattern="[0-9+\s()-]{7,}" title="Please enter a valid phone number">
+          </div>
+        </div>
+
+        <div class="form-section" x-show="!cartItems.some(item => item.type === 'sell_inquiry')">
+          <h3>Delivery Address</h3>
+          <div class="form-group">
+            <label for="street">Street Address *</label>
+            <input type="text" id="street" x-model="formData.street" required autocomplete="street-address">
+          </div>
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input type="text" id="city" x-model="formData.city" required autocomplete="address-level2">
+          </div>
+          <div class="form-group">
+            <label for="state">State *</label>
+            <input type="text" id="state" x-model="formData.state" required autocomplete="address-level1">
+          </div>
+          <div class="form-group">
+            <label for="country">Country *</label>
+            <select id="country" x-model="formData.country" required autocomplete="country-name">
+              <option value="">Select Country</option>
+              <option value="Afghanistan">Afghanistan</option>
+              <option value="Albania">Albania</option>
+              <option value="Algeria">Algeria</option>
+              <option value="Andorra">Andorra</option>
+              <option value="Angola">Angola</option>
+              <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+              <option value="Argentina">Argentina</option>
+              <option value="Armenia">Armenia</option>
+              <option value="Australia">Australia</option>
+              <option value="Austria">Austria</option>
+              <option value="Azerbaijan">Azerbaijan</option>
+              <option value="Bahamas">Bahamas</option>
+              <option value="Bahrain">Bahrain</option>
+              <option value="Bangladesh">Bangladesh</option>
+              <option value="Barbados">Barbados</option>
+              <option value="Belarus">Belarus</option>
+              <option value="Belgium">Belgium</option>
+              <option value="Belize">Belize</option>
+              <option value="Benin">Benin</option>
+              <option value="Bhutan">Bhutan</option>
+              <option value="Bolivia">Bolivia</option>
+              <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+              <option value="Botswana">Botswana</option>
+              <option value="Brazil">Brazil</option>
+              <option value="Brunei">Brunei</option>
+              <option value="Bulgaria">Bulgaria</option>
+              <option value="Burkina Faso">Burkina Faso</option>
+              <option value="Burundi">Burundi</option>
+              <option value="Cabo Verde">Cabo Verde</option>
+              <option value="Cambodia">Cambodia</option>
+              <option value="Cameroon">Cameroon</option>
+              <option value="Canada">Canada</option>
+              <option value="Central African Republic">Central African Republic</option>
+              <option value="Chad">Chad</option>
+              <option value="Chile">Chile</option>
+              <option value="China">China</option>
+              <option value="Colombia">Colombia</option>
+              <option value="Comoros">Comoros</option>
+              <option value="Congo">Congo</option>
+              <option value="Costa Rica">Costa Rica</option>
+              <option value="Croatia">Croatia</option>
+              <option value="Cuba">Cuba</option>
+              <option value="Cyprus">Cyprus</option>
+              <option value="Czech Republic">Czech Republic</option>
+              <option value="Denmark">Denmark</option>
+              <option value="Djibouti">Djibouti</option>
+              <option value="Dominica">Dominica</option>
+              <option value="Dominican Republic">Dominican Republic</option>
+              <option value="Ecuador">Ecuador</option>
+              <option value="Egypt">Egypt</option>
+              <option value="El Salvador">El Salvador</option>
+              <option value="Equatorial Guinea">Equatorial Guinea</option>
+              <option value="Eritrea">Eritrea</option>
+              <option value="Estonia">Estonia</option>
+              <option value="Eswatini">Eswatini</option>
+              <option value="Ethiopia">Ethiopia</option>
+              <option value="Fiji">Fiji</option>
+              <option value="Finland">Finland</option>
+              <option value="France">France</option>
+              <option value="Gabon">Gabon</option>
+              <option value="Gambia">Gambia</option>
+              <option value="Georgia">Georgia</option>
+              <option value="Germany">Germany</option>
+              <option value="Ghana">Ghana</option>
+              <option value="Greece">Greece</option>
+              <option value="Grenada">Grenada</option>
+              <option value="Guatemala">Guatemala</option>
+              <option value="Guinea">Guinea</option>
+              <option value="Guinea-Bissau">Guinea-Bissau</option>
+              <option value="Guyana">Guyana</option>
+              <option value="Haiti">Haiti</option>
+              <option value="Honduras">Honduras</option>
+              <option value="Hungary">Hungary</option>
+              <option value="Iceland">Iceland</option>
+              <option value="India">India</option>
+              <option value="Indonesia">Indonesia</option>
+              <option value="Iran">Iran</option>
+              <option value="Iraq">Iraq</option>
+              <option value="Ireland">Ireland</option>
+              <option value="Israel">Israel</option>
+              <option value="Italy">Italy</option>
+              <option value="Jamaica">Jamaica</option>
+              <option value="Japan">Japan</option>
+              <option value="Jordan">Jordan</option>
+              <option value="Kazakhstan">Kazakhstan</option>
+              <option value="Kenya">Kenya</option>
+              <option value="Kiribati">Kiribati</option>
+              <option value="Korea, North">Korea, North</option>
+              <option value="Korea, South">Korea, South</option>
+              <option value="Kosovo">Kosovo</option>
+              <option value="Kuwait">Kuwait</option>
+              <option value="Kyrgyzstan">Kyrgyzstan</option>
+              <option value="Laos">Laos</option>
+              <option value="Latvia">Latvia</option>
+              <option value="Lebanon">Lebanon</option>
+              <option value="Lesotho">Lesotho</option>
+              <option value="Liberia">Liberia</option>
+              <option value="Libya">Libya</option>
+              <option value="Liechtenstein">Liechtenstein</option>
+              <option value="Lithuania">Lithuania</option>
+              <option value="Luxembourg">Luxembourg</option>
+              <option value="Madagascar">Madagascar</option>
+              <option value="Malawi">Malawi</option>
+              <option value="Malaysia">Malaysia</option>
+              <option value="Maldives">Maldives</option>
+              <option value="Mali">Mali</option>
+              <option value="Malta">Malta</option>
+              <option value="Marshall Islands">Marshall Islands</option>
+              <option value="Mauritania">Mauritania</option>
+              <option value="Mauritius">Mauritius</option>
+              <option value="Mexico">Mexico</option>
+              <option value="Micronesia">Micronesia</option>
+              <option value="Moldova">Moldova</option>
+              <option value="Monaco">Monaco</option>
+              <option value="Mongolia">Mongolia</option>
+              <option value="Montenegro">Montenegro</option>
+              <option value="Morocco">Morocco</option>
+              <option value="Mozambique">Mozambique</option>
+              <option value="Myanmar">Myanmar</option>
+              <option value="Namibia">Namibia</option>
+              <option value="Nauru">Nauru</option>
+              <option value="Nepal">Nepal</option>
+              <option value="Netherlands">Netherlands</option>
+              <option value="New Zealand">New Zealand</option>
+              <option value="Nicaragua">Nicaragua</option>
+              <option value="Niger">Niger</option>
+              <option value="Nigeria">Nigeria</option>
+              <option value="North Macedonia">North Macedonia</option>
+              <option value="Norway">Norway</option>
+              <option value="Oman">Oman</option>
+              <option value="Pakistan">Pakistan</option>
+              <option value="Palau">Palau</option>
+              <option value="Palestine">Palestine</option>
+              <option value="Panama">Panama</option>
+              <option value="Papua New Guinea">Papua New Guinea</option>
+              <option value="Paraguay">Paraguay</option>
+              <option value="Peru">Peru</option>
+              <option value="Philippines">Philippines</option>
+              <option value="Poland">Poland</option>
+              <option value="Portugal">Portugal</option>
+              <option value="Qatar">Qatar</option>
+              <option value="Romania">Romania</option>
+              <option value="Russia">Russia</option>
+              <option value="Rwanda">Rwanda</option>
+              <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+              <option value="Saint Lucia">Saint Lucia</option>
+              <option value="Saint Vincent and the Grenadines">Saint Vincent and the Grenadines</option>
+              <option value="Samoa">Samoa</option>
+              <option value="San Marino">San Marino</option>
+              <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+              <option value="Saudi Arabia">Saudi Arabia</option>
+              <option value="Senegal">Senegal</option>
+              <option value="Serbia">Serbia</option>
+              <option value="Seychelles">Seychelles</option>
+              <option value="Sierra Leone">Sierra Leone</option>
+              <option value="Singapore">Singapore</option>
+              <option value="Slovakia">Slovakia</option>
+              <option value="Slovenia">Slovenia</option>
+              <option value="Solomon Islands">Solomon Islands</option>
+              <option value="Somalia">Somalia</option>
+              <option value="South Africa">South Africa</option>
+              <option value="South Sudan">South Sudan</option>
+              <option value="Spain">Spain</option>
+              <option value="Sri Lanka">Sri Lanka</option>
+              <option value="Sudan">Sudan</option>
+              <option value="Suriname">Suriname</option>
+              <option value="Sweden">Sweden</option>
+              <option value="Switzerland">Switzerland</option>
+              <option value="Syria">Syria</option>
+              <option value="Taiwan">Taiwan</option>
+              <option value="Tajikistan">Tajikistan</option>
+              <option value="Tanzania">Tanzania</option>
+              <option value="Thailand">Thailand</option>
+              <option value="Timor-Leste">Timor-Leste</option>
+              <option value="Togo">Togo</option>
+              <option value="Tonga">Tonga</option>
+              <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+              <option value="Tunisia">Tunisia</option>
+              <option value="Turkey">Turkey</option>
+              <option value="Turkmenistan">Turkmenistan</option>
+              <option value="Tuvalu">Tuvalu</option>
+              <option value="Uganda">Uganda</option>
+              <option value="Ukraine">Ukraine</option>
+              <option value="United Arab Emirates">United Arab Emirates</option>
+              <option value="United Kingdom">United Kingdom</option>
+              <option value="United States">United States</option>
+              <option value="Uruguay">Uruguay</option>
+              <option value="Uzbekistan">Uzbekistan</option>
+              <option value="Vanuatu">Vanuatu</option>
+              <option value="Vatican City">Vatican City</option>
+              <option value="Venezuela">Venezuela</option>
+              <option value="Vietnam">Vietnam</option>
+              <option value="Yemen">Yemen</option>
+              <option value="Zambia">Zambia</option>
+              <option value="Zimbabwe">Zimbabwe</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="payment-section" x-show="!cartItems.some(item => item.type === 'sell_inquiry')">
+          <h3>Payment Information</h3>
+          <div class="form-group">
+            <label for="paymentMethod">Payment Method *</label>
+            <!-- Payment Method Select Dropdown -->
+            <select
+              id="paymentMethod"
+              x-model="formData.paymentMethod"
+              required
+              style="width:100%;padding:16px 20px;border:2px solid #e6e6e6;border-radius:12px;background:#fff;font-size:1rem;color:#333;cursor:pointer;appearance:none;transition:all 0.3s cubic-bezier(0.4, 0, 0.2, 1);box-shadow:0 2px 8px rgba(0,0,0,0.1);"
+              x-init="$el.style.backgroundImage = 'url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'%23666\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'%3e%3cpath d=\'M7 10L12 15L17 10\'/%3e%3c/svg%3e\")'; $el.style.backgroundRepeat = 'no-repeat'; $el.style.backgroundPosition = 'right 16px center'; $el.style.backgroundSize = '20px'; $el.style.paddingRight = '50px';"
+            >
+              <option value="" disabled selected style="color:#999;">Select Payment Method</option>
+              <template x-for="(m, index) in availablePaymentOptions" :key="index">
+                <option :value="m.id" x-text="m.icon + ' ' + m.label + (m.featured ? ' ⭐' : '')"></option>
+              </template>
+            </select>
+
+            <p style="margin-top:10px;color:#666;font-size:0.95rem;">Available methods tailor to the selected country. Change country to see local options.</p>
+          </div>
+
+          <div class="payment-placeholder">
+            <!-- Payment provider managed on backend; placeholder removed per request -->
+            <p style="color:#666">Please select your preferred payment method. Payment processing will occur on the server.</p>
+          </div>
+
+          <button type="submit" class="btn-pay" :disabled="!isFormValid || !formData.paymentMethod">Complete Payment</button>
+        </div>
+
+        <div class="payment-section" x-show="cartItems.some(item => item.type === 'sell_inquiry')">
+          <h3>Inquiry Submission</h3>
+          <div class="payment-placeholder">
+            <p style="color:#666">Your mineral selling inquiry will be submitted to our team for evaluation. We'll contact you within 24 hours with our assessment and next steps.</p>
+          </div>
+
+          <button type="submit" class="btn-pay" :disabled="!isFormValid" style="background: linear-gradient(135deg, #f59e0b, #d97706);">Submit Inquiry</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h3 x-text="cartItems.some(item => item.type === 'sell_inquiry') ? 'Inquiry Summary' : 'Order Summary'"></h3>
+      <template x-for="item in cartItems" :key="item.name">
+        <div class="summary-item">
+          <span x-text="item.name + (item.type === 'sell_inquiry' ? '' : ' (x' + item.quantity + ')')"></span>
+          <span x-text="item.type === 'sell_inquiry' ? 'Free Inquiry' : formatCurrency(item.price * item.quantity)"></span>
+        </div>
+      </template>
+      <div class="summary-item" x-show="!cartItems.some(item => item.type === 'sell_inquiry')">
+        <span>Shipping:</span>
+        <span x-text="formatCurrency(shipping)"></span>
+      </div>
+      <div class="summary-item summary-total">
+        <span>Total:</span>
+        <span x-text="cartItems.some(item => item.type === 'sell_inquiry') ? 'Free Inquiry' : formatCurrency(total)"></span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Contact Info -->
+    <div class="footer-section contact-info">
+      <h4>Contact Us</h4>
+      <p>
+        <a href="tel:+2347035589713" class="footer-link">
+          <img src="images/phone.svg" alt="Phone" /> +234 703 558 9713
+        </a><br>
+        <a href="mailto:folsmeinternational@gmail.com" class="footer-link">
+          <img src="images/email.svg" alt="Email" /> folsmeinternational@gmail.com
+        </a><br>
+        <a href="https://goo.gl/maps/xxxx" target="_blank" class="footer-link">
+          <img src="images/location.svg" alt="Location" /> Head Office: Osogbo | Mining Site: Erio-Ekiti
+        </a>
+      </p>
+    </div>
+
+    <div class="footer-row1">
+      <!-- Navigation Links -->
+      <div class="footer-section footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+          <li><a href="services.html" class="footer-link">Services</a></li>
+          <li><a href="#why-choose-us" class="footer-link">Why Choose Us</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services Links -->
+      <div class="footer-section footer-services">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="services.html#mining" class="footer-link">Mining & Minerals</a></li>
+          <li><a href="energy.html" class="footer-link">Energy & Engineering</a></li>
+          <li><a href="construction.html" class="footer-link">Construction</a></li>
+          <li><a href="logistics.html" class="footer-link">Logistics</a></li>
+          <li><a href="oilgas.html" class="footer-link">Oil & Gas</a></li>
+          <li><a href="trade.html" class="footer-link">Trade & Commerce</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-row2">
+      <!-- Follow Us -->
+      <div class="footer-section footer-extra">
+        <h4>Follow Us</h4>
+        <p class="footer-socials">
+          <a href="https://wa.me/2347035589713" target="_blank" class="footer-link">
+            <img src="images/whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <a href="#" target="_blank" class="footer-link">
+            <img src="images/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="#" target="_blank" class="footer-link">
+            <img src="images/facebook.svg" alt="Facebook" />
+          </a>
+        </p>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-section footer-newsletter-section">
+        <h4>Newsletter</h4>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-note">We respect your privacy. Your data is secure with us.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 FOLSME International. All Rights Reserved. Designed by Seyi Olofin</p>
+  </div>
+</footer>
+
+<script>
+  // GSAP Animations for buttery smooth effects
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Enhanced page load animations
+  gsap.from(".checkout-container", {
+    duration: 0.8,
+    y: 50,
+    opacity: 0,
+    ease: "power3.out"
+  });
+
+  gsap.from(".product-grid", {
+    duration: 0.8,
+    y: 30,
+    opacity: 0,
+    delay: 0.1,
+    ease: "power3.out"
+  });
+
+  gsap.from(".checkout-form", {
+    duration: 0.8,
+    x: -50,
+    opacity: 0,
+    delay: 0.3,
+    ease: "power3.out"
+  });
+
+  gsap.from(".order-summary", {
+    duration: 0.8,
+    x: 50,
+    opacity: 0,
+    delay: 0.5,
+    ease: "power3.out"
+  });
+
+  // Animate form sections as they come into view
+  gsap.utils.toArray(".form-section").forEach((section, i) => {
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        toggleActions: "play none none none"
+      },
+      y: 30,
+      opacity: 0,
+      duration: 0.6,
+      delay: i * 0.1,
+      ease: "power3.out"
+    });
+  });
+
+  // Animate product cards with stagger
+  gsap.utils.toArray(".product-card").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        toggleActions: "play none none none"
+      },
+      y: 20,
+      opacity: 0,
+      duration: 0.5,
+      delay: i * 0.1,
+      ease: "power3.out"
+    });
+  });
+
+  // Enhanced hover animations
+  document.addEventListener('DOMContentLoaded', function() {
+    const formGroups = document.querySelectorAll('.form-group');
+    const paymentButtons = document.querySelectorAll('.payment-logos button');
+
+    formGroups.forEach(group => {
+      group.addEventListener('mouseenter', function() {
+        gsap.to(this, {
+          scale: 1.02,
+          y: -2,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+
+      group.addEventListener('mouseleave', function() {
+        gsap.to(this, {
+          scale: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "power2.out"
+        });
+      });
+    });
+
+    // Payment button hover effects
+    paymentButtons.forEach(button => {
+      button.addEventListener('mouseenter', function() {
+        if (!this.classList.contains('selected-payment')) {
+          gsap.to(this, {
+            scale: 1.05,
+            y: -2,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        }
+      });
+
+      button.addEventListener('mouseleave', function() {
+        if (!this.classList.contains('selected-payment')) {
+          gsap.to(this, {
+            scale: 1,
+            y: 0,
+            duration: 0.2,
+            ease: "power2.out"
+          });
+        }
+      });
+    });
+
+    // Button click ripple effect
+    document.addEventListener('click', function(e) {
+      if (e.target.matches('.btn-pay') && !e.target.disabled) {
+        const ripple = document.createElement('div');
+        ripple.style.cssText = `
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255,255,255,0.6);
+          transform: scale(0);
+          animation: ripple 0.6s linear;
+          pointer-events: none;
+        `;
+
+        const rect = e.target.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        ripple.style.width = ripple.style.height = size + 'px';
+        ripple.style.left = e.clientX - rect.left - size/2 + 'px';
+        ripple.style.top = e.clientY - rect.top - size/2 + 'px';
+
+        e.target.style.position = 'relative';
+        e.target.appendChild(ripple);
+
+        setTimeout(() => ripple.remove(), 600);
+      }
+    });
+  });
+
+  // Add ripple animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+  `;
+  document.head.appendChild(style);
+
+
+  const products = {
+    household: { name: 'Household Generator', price: 2500000 },
+    compact: { name: 'Compact Backup Unit', price: 1800000 },
+    commercial: { name: 'Commercial Generator', price: 8500000 },
+    business: { name: 'Business Power Unit', price: 7200000 },
+    'heavy-duty': { name: 'Heavy Duty Generator', price: 15000000 },
+    factory: { name: 'Factory Power System', price: 25000000 },
+    tailored: { name: 'Tailored Power Solution', price: 0 },
+    specialized: { name: 'Specialized Energy Unit', price: 0 }
+  };
+
+  function checkoutPage() {
+    return {
+      formData: {
+        fullName: '',
+        email: '',
+        phone: '',
+        street: '',
+        city: '',
+        state: '',
+        country: '',
+        paymentMethod: ''
+      },
+      cartItems: [],
+      shipping: 0,
+      userCountryCode: '',
+      availablePaymentOptions: [],
+      paymentNotice: 'Payment integration will be implemented with Paystack/Flutterwave and cryptocurrency providers. For now this simulates a payment.',
+
+      init() {
+        // Check for mineral purchase data first (from mining page)
+        const mineralPurchase = JSON.parse(localStorage.getItem('folsme_purchase') || 'null');
+        if (mineralPurchase) {
+          // Load mineral purchase data
+          this.cartItems = [{
+            id: 'mineral_' + Date.now(),
+            name: mineralPurchase.item.name,
+            price: mineralPurchase.item.price,
+            quantity: mineralPurchase.item.quantity,
+            unit: mineralPurchase.item.unit,
+            image: mineralPurchase.item.image,
+            description: mineralPurchase.item.description,
+            type: 'mineral'
+          }];
+          localStorage.removeItem('folsme_purchase'); // Clean up
+        } else {
+          // Check for sell inquiry data
+          const sellInquiry = JSON.parse(localStorage.getItem('folsme_sell_inquiry') || 'null');
+          if (sellInquiry) {
+            // Load sell inquiry data
+            this.cartItems = [{
+              id: 'sell_inquiry_' + Date.now(),
+              name: `Sell Inquiry: ${sellInquiry.inquiry.mineralType}`,
+              price: 0,
+              quantity: 1,
+              unit: 'inquiry',
+              image: 'images/minerals/' + sellInquiry.inquiry.mineralType.replace(' ', '-').toLowerCase() + '.jpg',
+              description: `Mineral selling inquiry for ${sellInquiry.inquiry.quantity} tonnes of ${sellInquiry.inquiry.mineralType}`,
+              type: 'sell_inquiry',
+              inquiryData: sellInquiry.inquiry
+            }];
+            localStorage.removeItem('folsme_sell_inquiry'); // Clean up
+          } else {
+            // Load regular cart items from localStorage
+            this.cartItems = JSON.parse(localStorage.getItem('cart') || '[]');
+
+            // If cart is empty, check URL parameters
+            if (this.cartItems.length === 0) {
+              const urlParams = new URLSearchParams(window.location.search);
+              const productId = urlParams.get('product') || 'household';
+              const qty = urlParams.get('quantity') || 1;
+
+              const product = products[productId];
+              if (product) {
+                this.cartItems = [{
+                  id: productId,
+                  name: product.name,
+                  price: product.price,
+                  quantity: parseInt(qty),
+                  image: `images/generators/${productId}.jpg`,
+                  description: 'High-quality magnetic generator'
+                }];
+                // Save to localStorage to ensure consistency
+                this.saveCartItems();
+              }
+            }
+          }
+        }
+
+        // Ensure products are displayed in the "Your Order" section
+        if (this.cartItems.length > 0) {
+          console.log('Products loaded for checkout:', this.cartItems);
+        } else {
+          console.warn('No products found for checkout');
+        }
+
+        // Try to detect user country from navigator
+        try {
+          const lang = navigator.language || navigator.userLanguage || 'en-US';
+          const parts = lang.split('-');
+          this.userCountryCode = (parts[1] || parts[0]).toUpperCase();
+        } catch (e) {
+          this.userCountryCode = '';
+        }
+
+        // If country select already has value (from saved form), use it
+        if (this.formData.country) {
+          // keep as is
+        }
+
+        this.updateAvailablePayments();
+
+        // Auto-select first payment method if none selected
+        if (!this.formData.paymentMethod && this.availablePaymentOptions.length > 0) {
+          this.formData.paymentMethod = this.availablePaymentOptions[0].id;
+        }
+      },
+
+      get subtotal() {
+        return this.cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+      },
+
+      get total() {
+        return this.subtotal + this.shipping;
+      },
+
+      get cartQuantity() {
+        return this.cartItems.reduce((sum, item) => sum + item.quantity, 0);
+      },
+
+      get isFormValid() {
+        const isSellInquiry = this.cartItems.some(item => item.type === 'sell_inquiry');
+
+        if (isSellInquiry) {
+          // For sell inquiries, only require basic contact info
+          return this.formData.fullName &&
+                 this.formData.email &&
+                 this.formData.phone;
+        } else {
+          // For purchases, require full address
+          return this.formData.fullName &&
+                 this.formData.email &&
+                 this.formData.phone &&
+                 this.formData.street &&
+                 this.formData.city &&
+                 this.formData.state &&
+                 this.formData.country;
+        }
+      },
+
+      formatCurrency(amount) {
+        return '₦' + amount.toLocaleString();
+      },
+
+      updateQuantity(index, newQuantity) {
+        if (newQuantity < 1) newQuantity = 1;
+        if (newQuantity > 10) newQuantity = 10;
+        this.cartItems[index].quantity = newQuantity;
+        this.saveCartItems();
+      },
+
+      // Payment helpers
+      selectPayment(id) {
+        this.formData.paymentMethod = id;
+      },
+
+      updateAvailablePayments() {
+        // Comprehensive payment options with secure integration placeholders
+        const global = [
+          { id: 'credit_card', label: 'Credit Card', icon: '💳', secure: true, description: 'Visa, Mastercard, American Express' },
+          { id: 'debit_card', label: 'Debit Card', icon: '🏧', secure: true, description: 'Direct bank debit cards' },
+          { id: 'bank_transfer', label: 'Bank Transfer', icon: '🏦', secure: true, description: 'Direct bank to bank transfer' },
+          { id: 'paypal', label: 'PayPal', icon: '🅿️', secure: true, description: 'PayPal secure checkout' },
+          { id: 'apple_pay', label: 'Apple Pay', icon: '', secure: true, description: 'Apple Pay integration' },
+          { id: 'google_pay', label: 'Google Pay', icon: '🟢', secure: true, description: 'Google Pay integration' },
+          { id: 'bitcoin', label: 'Bitcoin (BTC)', icon: '₿', secure: true, description: 'Cryptocurrency payment' },
+          { id: 'ethereum', label: 'Ethereum (ETH)', icon: 'Ξ', secure: true, description: 'Ethereum cryptocurrency' },
+          { id: 'usdt', label: 'USDT (Tether)', icon: '💰', secure: true, description: 'Stablecoin payment' },
+          { id: 'bnb', label: 'BNB', icon: '🟡', secure: true, description: 'Binance Coin payment' },
+          { id: 'solana', label: 'Solana (SOL)', icon: '🟣', secure: true, description: 'Solana blockchain payments' },
+          { id: 'polygon', label: 'Polygon (MATIC)', icon: '🟠', secure: true, description: 'Polygon network payments' },
+          { id: 'cardano', label: 'Cardano (ADA)', icon: '🔵', secure: true, description: 'Cardano cryptocurrency' },
+          { id: 'polkadot', label: 'Polkadot (DOT)', icon: '🔴', secure: true, description: 'Polkadot network payments' }
+        ];
+
+        const africa = [
+          { id: 'paystack', label: 'Paystack', icon: '🔵', secure: true, description: 'Secure Nigerian payments', featured: true },
+          { id: 'flutterwave', label: 'Flutterwave', icon: '🌊', secure: true, description: 'African payment gateway', featured: true },
+          { id: 'opay', label: 'OPay', icon: '💚', secure: true, description: 'OPay digital wallet' },
+          { id: 'palmpay', label: 'PalmPay', icon: '🌴', secure: true, description: 'PalmPay instant payments' },
+          { id: 'monify', label: 'Monify', icon: '💰', secure: true, description: 'Monify payment gateway' },
+          { id: 'interswitch', label: 'Interswitch', icon: '🔄', secure: true, description: 'Interswitch payment solutions' },
+          { id: 'remita', label: 'Remita', icon: '🏦', secure: true, description: 'Remita payment platform' },
+          { id: 'quickteller', label: 'Quickteller', icon: '⚡', secure: true, description: 'Quickteller instant payments' }
+        ];
+
+        const international = [
+          { id: 'stripe', label: 'Stripe', icon: '🎯', secure: true, description: 'Global payment processing', featured: true },
+          { id: 'wise', label: 'Wise', icon: '🌍', secure: true, description: 'International money transfer' },
+          { id: 'revolut', label: 'Revolut', icon: '💫', secure: true, description: 'Digital banking payments' },
+          { id: 'alipay', label: 'Alipay', icon: '💙', secure: true, description: 'Chinese digital payments' },
+          { id: 'wechat_pay', label: 'WeChat Pay', icon: '💚', secure: true, description: 'WeChat payment system' },
+          { id: 'paypal', label: 'PayPal', icon: '🅿️', secure: true, description: 'PayPal secure checkout' },
+          { id: 'venmo', label: 'Venmo', icon: '💸', secure: true, description: 'Venmo digital payments' },
+          { id: 'cash_app', label: 'Cash App', icon: '💵', secure: true, description: 'Cash App payments' }
+        ];
+
+        // Default to global options
+        this.availablePaymentOptions = [...global];
+
+        // Add region-specific options based on country
+        if (this.userCountryCode === 'NG' || this.formData.country === 'Nigeria') {
+          this.availablePaymentOptions = [...africa, ...international, ...global];
+          this.paymentNotice = '🇳🇬 Nigerian payment options prioritized. All transactions are secured with bank-level encryption.';
+        } else if (['GH', 'KE', 'ZA', 'TZ', 'UG'].includes(this.userCountryCode) || ['Ghana', 'Kenya', 'South Africa', 'Tanzania', 'Uganda'].includes(this.formData.country)) {
+          this.availablePaymentOptions = [...international, ...africa, ...global];
+          this.paymentNotice = '🌍 African payment options available. Secure processing with local banking integration.';
+        } else {
+          this.availablePaymentOptions = [...international, ...global];
+          this.paymentNotice = '🌐 International payment options. All transactions secured with SSL encryption and PCI compliance.';
+        }
+
+        // Sort by featured status and security
+        this.availablePaymentOptions.sort((a, b) => {
+          if (a.featured && !b.featured) return -1;
+          if (!a.featured && b.featured) return 1;
+          return 0;
+        });
+      },
+
+      saveCartItems() {
+        localStorage.setItem('cart', JSON.stringify(this.cartItems));
+      },
+
+
+      goToCart() {
+        window.location.href = 'cart.html';
+      },
+
+      goBack() {
+        // Smooth scroll to top before navigation
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // Add fade out effect
+        document.body.style.transition = 'opacity 0.3s ease';
+        document.body.style.opacity = '0.7';
+
+        // Always navigate to cart page
+        setTimeout(() => {
+          window.location.href = 'cart.html';
+        }, 300);
+      },
+
+      processPayment() {
+        if (!this.isFormValid) return;
+
+        // Check if this is a sell inquiry
+        const isSellInquiry = this.cartItems.some(item => item.type === 'sell_inquiry');
+
+        if (isSellInquiry) {
+          // Handle sell inquiry submission
+          const inquiryData = this.cartItems.find(item => item.type === 'sell_inquiry').inquiryData;
+          const payload = {
+            type: 'sell_inquiry',
+            inquiry: inquiryData,
+            contactInfo: this.formData
+          };
+
+          // optimistic UI
+          const payBtn = document.querySelector('.btn-pay');
+          if (payBtn) {
+            payBtn.disabled = true;
+            payBtn.textContent = 'Submitting Inquiry...';
+          }
+
+          // Simulate successful inquiry submission
+          setTimeout(() => {
+            const orderData = {
+              orderNumber: 'SI' + Date.now(),
+              type: 'sell_inquiry',
+              ...this.formData,
+              inquiryData: inquiryData,
+              subtotal: 0,
+              shipping: 0,
+              total: 0,
+              status: 'submitted'
+            };
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+            window.location.href = 'confirmation.html';
+          }, 1000); // Simulate processing delay
+        } else {
+          // Handle regular purchase
+          const payload = {
+            paymentMethod: this.formData.paymentMethod,
+            formData: this.formData,
+            cartItems: this.cartItems,
+            amount: this.total
+          };
+
+          // optimistic UI
+          const payBtn = document.querySelector('.btn-pay');
+          if (payBtn) {
+            payBtn.disabled = true;
+            payBtn.textContent = 'Processing...';
+          }
+
+          // Simulate successful payment processing
+          setTimeout(() => {
+            const orderData = {
+              orderNumber: 'FS' + Date.now(),
+              ...this.formData,
+              cartItems: this.cartItems,
+              subtotal: this.subtotal,
+              shipping: this.shipping,
+              total: this.total,
+              paymentMethod: this.formData.paymentMethod,
+              status: 'completed'
+            };
+            localStorage.setItem('orderData', JSON.stringify(orderData));
+            window.location.href = 'confirmation.html';
+          }, 1000); // Simulate processing delay
+        }
+      }
+    }
+  }
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("folsme-hamburger");
+  const navMenu = document.getElementById("folsme-menu");
+  const closeBtn = document.getElementById("folsme-close");
+  const dropdownToggles = document.querySelectorAll(".folsme-toggle");
+
+  // === HAMBURGER TOGGLE ===
+  hamburger.addEventListener("click", () => {
+    hamburger.classList.toggle("active");
+    navMenu.classList.toggle("active");
+    document.body.classList.toggle("no-scroll", navMenu.classList.contains("active"));
+
+    // 🧹 When menu closes, reset all dropdowns
+    if (!navMenu.classList.contains("active")) {
+      document.querySelectorAll(".folsme-dropdown.open").forEach(d => {
+        d.classList.remove("open");
+        const caret = d.querySelector(".caret");
+        if (caret) caret.classList.remove("rotate");
+      });
+    }
+  });
+
+  // === CLOSE BUTTON ===
+  closeBtn.addEventListener("click", () => {
+    navMenu.classList.remove("active");
+    hamburger.classList.remove("active");
+    document.body.classList.remove("no-scroll");
+
+    // 🧹 Also close all dropdowns
+    document.querySelectorAll(".folsme-dropdown.open").forEach(d => {
+      d.classList.remove("open");
+      const caret = d.querySelector(".caret");
+      if (caret) caret.classList.remove("rotate");
+    });
+  });
+
+  // === DROPDOWN TOGGLE (Mobile Only) ===
+  dropdownToggles.forEach(toggle => {
+    toggle.addEventListener("click", e => {
+      if (window.innerWidth <= 992) {
+        e.preventDefault();
+        const parent = toggle.closest(".folsme-dropdown");
+        const caret = toggle.querySelector(".caret");
+
+        // Close other open dropdowns before opening new one
+        document.querySelectorAll(".folsme-dropdown.open").forEach(d => {
+          if (d !== parent) {
+            d.classList.remove("open");
+            const otherCaret = d.querySelector(".caret");
+            if (otherCaret) otherCaret.classList.remove("rotate");
+          }
+        });
+
+        // Toggle current dropdown
+        parent.classList.toggle("open");
+        if (caret) caret.classList.toggle("rotate");
+      }
+    });
+  });
+
+  // === ACTIVE LINK HIGHLIGHT ===
+  const current = window.location.pathname.split("/").pop();
+  document.querySelectorAll("#folsme-menu a").forEach(a => {
+    if (a.getAttribute("href") === current) {
+      a.classList.add("active");
+    }
+  });
+});
+
+</script>
+
+<script src="script.js"></script>
+</body>
+</html>

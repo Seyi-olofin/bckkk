@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: folsme-backend
+    runtime: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        value: folsme-secure-session-key-2024-very-long-random-string-here-make-it-unique
+      - key: ALLOWED_ORIGINS
+        value: https://folsmeinternationallimited.netlify.app
+      - key: PAYSTACK_SECRET_KEY
+        value: sk_live_your-actual-paystack-secret-key-here
+      - key: USE_POSTGRESQL
+        value: false
+    healthCheckPath: /health
+    autoDeploy: true

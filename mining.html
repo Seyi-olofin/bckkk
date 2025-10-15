@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Our Services | FOLSME International</title>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- GLightbox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Styles -->
+   <link rel="stylesheet" href="nav.css" />
+  <link rel="stylesheet" href="styless.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Minerals Page Enhancements */
+    .minerals-actions {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .buy-btn {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+    }
+
+    .buy-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+    }
+
+    .sell-btn {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+    }
+
+    .sell-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+    }
+
+    .minerals-section {
+      padding: 5rem 0;
+      background: #f8fafc;
+    }
+
+    .minerals-section .section-title {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+
+    .section-description {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      font-size: 1.1rem;
+      color: #64748b;
+      line-height: 1.6;
+    }
+
+    .minerals-buy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .mineral-buy-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mineral-buy-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    }
+
+    .mineral-buy-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .mineral-buy-content {
+      padding: 1.5rem;
+    }
+
+    .mineral-buy-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .mineral-buy-description {
+      color: #64748b;
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .mineral-buy-details {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .mineral-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .mineral-availability {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+    }
+
+    .availability-available {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .availability-limited {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .mineral-buy-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .btn-buy-now {
+      flex: 1;
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-buy-now:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    .btn-inquire {
+      background: transparent;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+      padding: 0.75rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-inquire:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .sell-form-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .sell-minerals-form {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .sell-minerals-form .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .sell-minerals-form label {
+      display: block;
+      font-weight: 600;
+      color: #374151;
+      margin-bottom: 0.5rem;
+    }
+
+    .sell-minerals-form input,
+    .sell-minerals-form select,
+    .sell-minerals-form textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .sell-minerals-form input:focus,
+    .sell-minerals-form select:focus,
+    .sell-minerals-form textarea:focus {
+      outline: none;
+      border-color: #10b981;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    .sell-minerals-form textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .sell-minerals-form .form-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: flex-end;
+      margin-top: 2rem;
+    }
+
+    .sell-minerals-form .btn {
+      padding: 0.75rem 2rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .sell-minerals-form .btn-primary {
+      background: linear-gradient(135deg, #f59e0b, #d97706);
+      color: white;
+      border: none;
+    }
+
+    .sell-minerals-form .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    }
+
+    .sell-minerals-form .btn-ghost {
+      background: transparent;
+      color: #6b7280;
+      border: 1px solid #d1d5db;
+    }
+
+    .sell-minerals-form .btn-ghost:hover {
+      background: #f9fafb;
+    }
+
+    .sample-preview {
+      margin-top: 10px;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      background: #f8fafc;
+    }
+
+    .sample-preview img {
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Purchase Modal */
+    .purchase-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .purchase-modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .purchase-modal-content {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+    }
+
+    .purchase-modal.show .purchase-modal-content {
+      transform: scale(1);
+    }
+
+    .purchase-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .purchase-modal-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0;
+    }
+
+    .purchase-modal-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #64748b;
+      padding: 0.25rem;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s ease;
+    }
+
+    .purchase-modal-close:hover {
+      background-color: #f1f5f9;
+    }
+
+    .purchase-summary {
+      margin-bottom: 2rem;
+    }
+
+    .purchase-item {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: #f8fafc;
+      border-radius: 8px;
+    }
+
+    .purchase-item-image {
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .purchase-item-details {
+      flex: 1;
+    }
+
+    .purchase-item-name {
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.25rem;
+    }
+
+    .purchase-item-description {
+      font-size: 0.875rem;
+      color: #64748b;
+      margin-bottom: 0.5rem;
+    }
+
+    .purchase-item-price {
+      font-weight: 600;
+      color: #059669;
+    }
+
+    .purchase-quantity {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+
+    .quantity-btn {
+      background: #e2e8f0;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    .quantity-btn:hover {
+      background: #cbd5e1;
+    }
+
+    .quantity-input {
+      width: 60px;
+      text-align: center;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .purchase-total {
+      border-top: 2px solid #e2e8f0;
+      padding-top: 1rem;
+      margin-top: 1rem;
+    }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .total-label {
+      font-weight: 600;
+      color: #374151;
+    }
+
+    .total-amount {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #059669;
+    }
+
+    .purchase-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .purchase-actions .btn {
+      flex: 1;
+      padding: 0.875rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-cancel {
+      background: #f1f5f9;
+      color: #64748b;
+      border: 1px solid #e2e8f0;
+    }
+
+    .btn-cancel:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-proceed {
+      background: linear-gradient(135deg, #10b981, #059669);
+      color: white;
+      border: none;
+    }
+
+    .btn-proceed:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+    }
+
+    @media (max-width: 480px) {
+      .purchase-modal-content {
+        padding: 1.5rem;
+        margin: 1rem;
+      }
+
+      .purchase-actions {
+        flex-direction: column;
+      }
+
+      .purchase-item {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .purchase-item-image {
+        align-self: center;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .minerals-actions {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .action-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+      }
+
+      .minerals-buy-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sell-form-container {
+        padding: 0 1rem;
+      }
+
+      .sell-minerals-form {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+ 
+
+<header id="folsme-nav">
+  <div class="folsme-container">
+    <div class="folsme-logo">
+      <img src="images/logo.svg" alt="FOLSME Logo">
+      <span>FOLSME international LTD</span>
+    </div>
+
+    <!-- Hamburger -->
+    <div id="folsme-hamburger" class="folsme-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav id="folsme-menu" class="folsme-menu">
+      <button id="folsme-close" class="folsme-close">&times;</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        
+        <li class="folsme-dropdown">
+          <a href="#" class="folsme-toggle active">Services ▾</a>
+          <ul class="folsme-submenu">
+             <li><a href="mining.html"class="active">Mining</a></li>
+              <li><a href="energy.html">Magnetic Generators</a></li>
+            <li><a href="construction.html">Construction</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="oilgas.html" >Oil & Gas</a></li>
+            <li><a href="trade.html">Trade & Commerce</a></li>
+          </ul>
+        </li>
+
+        <li><a href="generators.html">Generators</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+<!-- HERO SECTION -->
+<section class="services-hero mining-hero">
+  <div class="hero-bg">
+    <img src="images/mining-bg1.jpeg" alt="Mining background" class="hero-img img1">
+    <img src="images/mining-bg2.jpeg" alt="Mining refined stones" class="hero-img img2">
+  </div>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1 class="hero-title">Mining & Minerals</h1>
+
+    <p>
+      From excavation to refined stones, we deliver excellence at every stage of the mining process.  
+      We also refine, buy, and sell all kinds of mineral resources across Nigeria and beyond.
+    </p>
+  </div>
+
+  <!-- Shape Divider -->
+  <div class="custom-shape-divider-bottom">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 L1200,100 L1200,0 L0,0 Z" class="shape-fill"></path>
+    </svg>
+  </div>
+</section>
+
+
+<!-- MINING DETAILS SECTION -->
+<section id="mining-details" class="service-details white-bg">
+  <div class="container">
+    <div class="details-content">
+      <h2 class="section-title">Mining & Minerals Resources</h2>
+      <p class="details-paragraph">
+        At <span class="blue-text">FOLSME International</span>, our mining operations span the full value chain: exploration, extraction, refining, and trading. We focus on responsible practices, regulatory compliance, and highest quality output.  
+        <br><br>
+        We source raw mineral ores from regional deposits, apply modern beneficiation techniques, and deliver refined forms for industrial, commercial, and export markets. Our team uses advanced geotechnical surveys and mineral detection technologies to determine deposit viability and ensure efficient extraction methods.  
+        <br><br>
+        Below are some of the mineral resources we deal in, reflecting our deep expertise and diversified portfolio.
+      </p>
+    </div>
+
+  <!-- Minerals We Deal In -->
+<section class="minerals-highlights">
+  <h3 class="sub-title underlined">Minerals We Deal In</h3>
+  <div class="minerals-grid" id="minerals-grid">
+    <!-- Minerals will be loaded dynamically -->
+  </div>
+
+  <!-- Action Buttons -->
+  <div class="minerals-actions">
+    <a href="#buy-minerals" class="action-btn buy-btn">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M3 3H5L5.4 5M7 13H17L21 5H5.4M7 13L5.4 5M7 13L4.707 15.293C4.077 15.923 4.523 17 5.414 17H17M17 17C15.895 17 15 17.895 15 19C15 20.105 15.895 21 17 21C18.105 21 19 20.105 19 19C19 17.895 18.105 17 17 17ZM9 19C9 20.105 8.105 21 7 21C5.895 21 5 20.105 5 19C5 17.895 5.895 19 7 19C8.105 19 9 17.895 9 19Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Buy Mineral Resources
+    </a>
+    <a href="#sell-minerals" class="action-btn sell-btn">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      Sell Mineral Resources
+    </a>
+  </div>
+</section>
+
+<!-- Buy Minerals Section -->
+<section id="buy-minerals" class="minerals-section">
+  <div class="container">
+    <h2 class="section-title">Buy Mineral Resources</h2>
+    <p class="section-description">
+      Browse our available mineral resources for purchase. We offer competitive pricing and quality assurance for all our mineral products.
+    </p>
+
+    <div class="minerals-buy-grid" id="buy-minerals-grid">
+      <!-- Buy minerals will be loaded dynamically -->
+    </div>
+  </div>
+</section>
+
+<!-- Purchase Modal -->
+<div id="purchaseModal" class="purchase-modal">
+  <div class="purchase-modal-content">
+    <div class="purchase-modal-header">
+      <h2 class="purchase-modal-title">Confirm Purchase</h2>
+      <button class="purchase-modal-close" id="purchaseModalClose">&times;</button>
+    </div>
+
+    <div id="purchaseSummary" class="purchase-summary">
+      <!-- Purchase details will be populated by JavaScript -->
+    </div>
+
+    <div class="purchase-actions">
+      <button class="btn btn-cancel" id="cancelPurchase">Cancel</button>
+      <button class="btn btn-proceed" id="confirmPurchase">Proceed to Checkout</button>
+    </div>
+  </div>
+</div>
+
+<!-- Sell Minerals Section -->
+<section id="sell-minerals" class="minerals-section">
+  <div class="container">
+    <h2 class="section-title">Sell Mineral Resources</h2>
+    <p class="section-description">
+      Have mineral resources to sell? We provide fair market prices and professional evaluation services. Contact us to discuss your mineral assets.
+    </p>
+
+    <div class="sell-form-container">
+      <form class="sell-minerals-form" id="sellMineralsForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sellerName">Full Name</label>
+            <input type="text" id="sellerName" name="sellerName" required>
+          </div>
+          <div class="form-group">
+            <label for="sellerEmail">Email Address</label>
+            <input type="email" id="sellerEmail" name="sellerEmail" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="sellerPhone">Phone Number</label>
+            <input type="tel" id="sellerPhone" name="sellerPhone" required>
+          </div>
+          <div class="form-group">
+            <label for="mineralType">Mineral Type</label>
+            <select id="mineralType" name="mineralType" required>
+              <option value="">Select Mineral Type</option>
+              <option value="gold">Gold</option>
+              <option value="iron-ore">Iron Ore</option>
+              <option value="barite">Barite & Barytes</option>
+              <option value="coal">Coal / Lignite</option>
+              <option value="gypsum">Gypsum & Limestone</option>
+              <option value="kaolin">Kaolin & Clay Minerals</option>
+              <option value="bitumen">Bitumen / Asphalt</option>
+              <option value="zinc">Lead & Zinc Ores</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="quantity">Estimated Quantity (Tonnes)</label>
+          <input type="number" id="quantity" name="quantity" min="1" required>
+        </div>
+
+        <div class="form-group">
+          <label for="location">Location/Source</label>
+          <input type="text" id="location" name="location" placeholder="State/City, Nigeria" required>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description & Quality Details</label>
+          <textarea id="description" name="description" rows="4" placeholder="Describe your mineral resources, quality, purity, etc." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="samplePhoto">Upload Sample Photo (Optional)</label>
+          <input type="file" id="samplePhoto" name="samplePhoto" accept="image/*" onchange="previewSample(this)">
+          <div id="samplePreview" class="sample-preview" style="display: none;">
+            <img id="sampleImage" src="" alt="Sample preview" style="max-width: 200px; max-height: 200px; border-radius: 8px; margin-top: 10px;">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="expectedPrice">Expected Price (₦ per tonne)</label>
+          <input type="number" id="expectedPrice" name="expectedPrice" min="0" step="0.01">
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-ghost" onclick="resetSellForm()">Reset</button>
+          <button type="submit" class="btn btn-primary">Submit for Evaluation</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+</section>
+
+<!-- Facts & Highlights -->
+<section class="facts-section">
+  <div class="facts-container">
+
+    <!-- Left: List -->
+    <div class="facts-left">
+      <h3 class="sub-title underlined">Facts & Highlights</h3>
+      <ul>
+        <li>Nigeria holds <strong>over 44 mineral types</strong> in commercial quantities, across more than 500 locations.</li>
+        <li>Major deposits include <strong>iron ore, gold, coal, barite, gypsum, kaolin, limestone, bitumen, and lead/zinc</strong>.</li>
+        <li>Itakpe in Kogi State is home to a large iron ore reserve (estimated 3 billion tonnes).</li>
+        <li>Barite reserves exceed 7.5 million tonnes found in Taraba and Bauchi states.</li>
+        <li>Bentonite and baryte are essential in drilling fluids for oil wells; Nigeria produces both minerals.</li>
+        <li>Bitumen reserves are estimated at ~42 billion tonnes—among the world’s largest known.</li>
+      </ul>
+    </div>
+
+    <!-- Right: Stat Cards -->
+    <div class="facts-right">
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="44">0</h3>
+        <p class="stat-label">Mineral Types</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="500">0</h3>
+        <p class="stat-label">Mining Locations</p>
+      </div>
+      <div class="stat-card">
+        <h3 class="stat-number" data-target="42">0</h3>
+        <p class="stat-label">Billion Tonnes of Bitumen</p>
+      </div>
+      <div class="experience-badge">
+  <h2 class="years">10 Years</h2>
+  <p class="certified">Certified Experience</p>
+</div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+<!-- CTA Section -->
+<section id="contact" class="cta-section">
+  <div class="cta-container">
+    <h2 class="cta-title">Partner with Us in the Mining Sector</h2>
+    <p class="cta-text">
+      Let’s work together to unlock the full potential of Nigeria’s mineral resources.  
+      From exploration to refining and global trade, <strong>FOLSME International Limited</strong>  
+      is your trusted partner every step of the way.
+    </p>
+    <a href="contact.html" class="cta-btn">Contact Us</a>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Contact Info -->
+      <div class="footer-section contact-info">
+        <h4>Contact Us</h4>
+        <p>
+          <a href="tel:+2347035589713" class="footer-link">
+            <img src="images/phone.svg" alt="Phone" /> +234 703 558 9713
+          </a><br>
+          <a href="mailto:folsmeinternational@gmail.com" class="footer-link">
+            <img src="images/email.svg" alt="Email" /> folsmeinternational@gmail.com
+          </a><br>
+          <a href="https://goo.gl/maps/xxxx" target="_blank" class="footer-link">
+            <img src="images/location.svg" alt="Location" /> Head Office: Osogbo | Mining Site: Erio-Ekiti
+          </a>
+        </p>
+      </div>
+
+      <div class="footer-row1">
+        <!-- Navigation Links -->
+        <div class="footer-section footer-nav">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="#why-choose-us" class="footer-link">Why Choose Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Links -->
+        <div class="footer-section footer-services">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="services.html#mining" class="footer-link">Mining & Minerals</a></li>
+            <li><a href="energy.html" class="footer-link">Energy & Engineering</a></li>
+            <li><a href="construction.html" class="footer-link">Construction</a></li>
+            <li><a href="logistics.html" class="footer-link">Logistics</a></li>
+            <li><a href="oilgas.html" class="footer-link">Oil & Gas</a></li>
+            <li><a href="trade.html" class="footer-link">Trade & Commerce</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-row2">
+        <!-- Follow Us -->
+        <div class="footer-section footer-extra">
+          <h4>Follow Us</h4>
+          <p class="footer-socials">
+            <a href="https://wa.me/2347035589713" target="_blank" class="footer-link">
+              <img src="images/whatsapp.svg" alt="WhatsApp" />
+            </a>
+            <a href="#" target="_blank" class="footer-link">
+              <img src="images/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="#" target="_blank" class="footer-link">
+              <img src="images/facebook.svg" alt="Facebook" />
+            </a>
+          </p>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section footer-newsletter-section">
+          <h4>Newsletter</h4>
+          <form class="footer-newsletter">
+            <input type="email" placeholder="Your email address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="newsletter-note">We respect your privacy. Your data is secure with us.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 FOLSME International. All Rights Reserved. Designed by Seyi Olofin</p>
+    </div>
+  </footer>
+
+
+
+
+
+<!-- other HTML -->
+ <script>
+
+    gsap.registerPlugin(ScrollTrigger);
+
+  // GSAP animations - only run if elements exist
+  if (document.querySelector(".about-section-container")) {
+    gsap.from(".about-section-container", {
+      scrollTrigger: {
+        trigger: ".about-section-container",
+        start: "top 80%", // starts anim when section is 80% in viewport
+        toggleActions: "play none none none"
+      },
+      y: 100,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power3.out"
+    });
+  }
+
+  gsap.utils.toArray(".stat-number").forEach((num) => {
+    if (num) {
+      let target = +num.dataset.target;
+      gsap.fromTo(num,
+        { innerText: 0 },
+        {
+          innerText: target,
+          duration: 2,
+          ease: "power3.out",
+          snap: { innerText: 1 },
+          scrollTrigger: {
+            trigger: num,
+            start: "top 80%",
+          }
+        }
+      );
+    }
+  });
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  if (document.querySelector(".service-details .section-title")) {
+    gsap.from(".service-details .section-title", {
+      scrollTrigger: {
+        trigger: ".service-details .section-title",
+        start: "top 80%",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3.out"
+    });
+  }
+
+  if (document.querySelector(".details-paragraph")) {
+    gsap.from(".details-paragraph", {
+      scrollTrigger: {
+        trigger: ".details-paragraph",
+        start: "top 85%",
+      },
+      opacity: 0,
+      y: 40,
+      delay: 0.3,
+      duration: 1,
+      ease: "power3.out"
+    });
+  }
+
+  if (document.querySelector(".highlights-grid .highlight-item")) {
+    gsap.from(".highlights-grid .highlight-item", {
+      scrollTrigger: {
+        trigger: ".highlights-grid",
+        start: "top 90%",
+      },
+      opacity: 0,
+      y: 30,
+      stagger: 0.2,
+      duration: 1,
+      ease: "power3.out"
+    });
+  }
+
+  if (document.querySelector(".mineral-facts ul li")) {
+    gsap.from(".mineral-facts ul li", {
+      scrollTrigger: {
+        trigger: ".mineral-facts",
+        start: "top 90%",
+      },
+      opacity: 0,
+      y: 20,
+      stagger: 0.15,
+      duration: 0.8,
+      ease: "power3.out"
+    });
+  }
+
+  if (document.querySelector(".contact-btn")) {
+    gsap.from(".contact-btn", {
+      scrollTrigger: {
+        trigger: ".contact-btn",
+        start: "top 95%",
+      },
+      opacity: 0,
+      y: 40,
+      duration: 1,
+      ease: "power3.out"
+    });
+  }
+  // GSAP Animation for CTA - only if element exists
+  if (document.querySelector(".cta-container")) {
+    gsap.from(".cta-container", {
+      scrollTrigger: {
+        trigger: ".cta-section",
+        start: "top 85%",
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1.2,
+      ease: "power3.out"
+    });
+  }
+
+</script>
+
+
+
+
+
+<script>
+  gsap.from(".about-section-container", { duration: 1.2, y: 80, opacity: 0, ease: "power3.out" });
+</script>
+
+<script>
+  const lightbox = GLightbox({
+    selector: '.glightbox',
+    touchNavigation: true,
+    loop: true,
+    zoomable: true,
+    autoplayVideos: false,
+    closeButton: true,
+    openEffect: 'zoom',   // smooth zoom-in
+    closeEffect: 'fade',  // smooth fade-out
+    slideEffect: 'slide', // slide between items
+  });
+</script>
+  <script>
+document.addEventListener("DOMContentLoaded", () => {
+
+
+  // === MINERALS FUNCTIONALITY ===
+  loadMinerals();
+  loadBuyMinerals();
+
+  // Sell form handling
+  const sellForm = document.getElementById('sellMineralsForm');
+  if (sellForm) {
+    sellForm.addEventListener('submit', handleSellMinerals);
+  }
+
+  // Smooth scroll to sections
+  document.querySelectorAll('.action-btn[href^="#"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(btn.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+
+  // Purchase modal event listeners
+  document.getElementById('purchaseModalClose').addEventListener('click', hidePurchaseModal);
+  document.getElementById('cancelPurchase').addEventListener('click', hidePurchaseModal);
+  document.getElementById('confirmPurchase').addEventListener('click', confirmPurchase);
+
+  // Close modal on outside click
+  document.getElementById('purchaseModal').addEventListener('click', (e) => {
+    if (e.target.id === 'purchaseModal') {
+      hidePurchaseModal();
+    }
+  });
+});
+
+// Load minerals for display
+async function loadMinerals() {
+  const minerals = [
+    { name: 'Gold', image: 'images/minerals/gold.jpg', description: 'High-quality gold mining and extraction services' },
+    { name: 'Iron Ore', image: 'images/minerals/iron-ore.jpg', description: 'Premium iron ore with high mineral content' },
+    { name: 'Barite & Barytes', image: 'images/minerals/barite.jpg', description: 'Industrial-grade barite for drilling fluids' },
+    { name: 'Coal / Lignite', image: 'images/minerals/coal.jpg', description: 'Energy-grade coal for industrial use' },
+    { name: 'Gypsum & Limestone', image: 'images/minerals/gypsum.jpg', description: 'Construction and industrial gypsum' },
+    { name: 'Kaolin & Clay Minerals', image: 'images/minerals/kaolin.jpg', description: 'High-purity kaolin for various applications' },
+    { name: 'Bitumen / Asphalt', image: 'images/minerals/bitumen.jpg', description: 'Premium bitumen for construction' },
+    { name: 'Lead & Zinc Ores', image: 'images/minerals/zinc.jpg', description: 'Rich lead and zinc ore deposits' }
+  ];
+
+  const grid = document.getElementById('minerals-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  minerals.forEach(mineral => {
+    const card = document.createElement('div');
+    card.className = 'mineral-card';
+    card.innerHTML = `
+      <img src="${mineral.image}" alt="${mineral.name}" class="mineral-img">
+      <h4 class="mineral-name">${mineral.name}</h4>
+      <p class="mineral-description">${mineral.description}</p>
+      <div class="mineral-actions">
+        <a href="${mineral.image}" class="view-btn glightbox">View Sample</a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Load minerals available for purchase
+async function loadBuyMinerals() {
+  const buyMinerals = [
+    {
+      name: 'Gold Nuggets',
+      image: 'images/minerals/gold.jpg',
+      description: 'Premium gold nuggets, 99.9% purity',
+      price: 2500000,
+      unit: 'kg',
+      availability: 'available'
+    },
+    {
+      name: 'Iron Ore Fines',
+      image: 'images/minerals/iron-ore.jpg',
+      description: 'High-grade iron ore fines, Fe 62%+',
+      price: 85000,
+      unit: 'tonne',
+      availability: 'available'
+    },
+    {
+      name: 'Barite Powder',
+      image: 'images/minerals/barite.jpg',
+      description: 'API grade barite powder for drilling',
+      price: 120000,
+      unit: 'tonne',
+      availability: 'limited'
+    },
+    {
+      name: 'Coal Lumps',
+      image: 'images/minerals/coal.jpg',
+      description: 'Premium coal lumps for industrial use',
+      price: 45000,
+      unit: 'tonne',
+      availability: 'available'
+    },
+    {
+      name: 'Gypsum Powder',
+      image: 'images/minerals/gypsum.jpg',
+      description: 'Construction grade gypsum powder',
+      price: 35000,
+      unit: 'tonne',
+      availability: 'available'
+    },
+    {
+      name: 'Kaolin Clay',
+      image: 'images/minerals/kaolin.jpg',
+      description: 'High-whiteness kaolin for ceramics',
+      price: 55000,
+      unit: 'tonne',
+      availability: 'limited'
+    }
+  ];
+
+  const grid = document.getElementById('buy-minerals-grid');
+  if (!grid) return;
+
+  grid.innerHTML = '';
+
+  buyMinerals.forEach(mineral => {
+    const card = document.createElement('div');
+    card.className = 'mineral-buy-card';
+    card.innerHTML = `
+      <img src="${mineral.image}" alt="${mineral.name}" class="mineral-buy-image">
+      <div class="mineral-buy-content">
+        <h3 class="mineral-buy-title">${mineral.name}</h3>
+        <p class="mineral-buy-description">${mineral.description}</p>
+        <div class="mineral-buy-details">
+          <span class="mineral-price">₦${mineral.price.toLocaleString()}/${mineral.unit}</span>
+          <span class="mineral-availability availability-${mineral.availability}">
+            ${mineral.availability === 'available' ? 'In Stock' : 'Limited Stock'}
+          </span>
+        </div>
+        <div class="mineral-buy-actions">
+          <button class="btn-buy-now" onclick="buyMineral('${mineral.name}', ${mineral.price}, '${mineral.unit}', '${mineral.image}', '${mineral.description}')">
+            Proceed to Checkout
+          </button>
+          <button class="btn-inquire" onclick="inquireMineral('${mineral.name}')">
+            Inquire
+          </button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+// Global variables for purchase modal
+let currentPurchaseItem = null;
+
+// Handle mineral purchase
+function buyMineral(name, price, unit, image, description) {
+  currentPurchaseItem = {
+    name: name,
+    price: price,
+    unit: unit,
+    image: image,
+    description: description,
+    quantity: 1
+  };
+
+  showPurchaseModal();
+}
+
+// Show purchase modal
+function showPurchaseModal() {
+  const modal = document.getElementById('purchaseModal');
+  const summary = document.getElementById('purchaseSummary');
+
+  if (!currentPurchaseItem) return;
+
+  const item = currentPurchaseItem;
+  const total = item.price * item.quantity;
+
+  summary.innerHTML = `
+    <div class="purchase-item">
+      <img src="${item.image}" alt="${item.name}" class="purchase-item-image">
+      <div class="purchase-item-details">
+        <h3 class="purchase-item-name">${item.name}</h3>
+        <p class="purchase-item-description">${item.description}</p>
+        <p class="purchase-item-price">₦${item.price.toLocaleString()}/${item.unit}</p>
+      </div>
+    </div>
+
+    <div class="purchase-quantity">
+      <button class="quantity-btn" onclick="updateQuantity(-1)">-</button>
+      <input type="number" class="quantity-input" id="purchaseQuantity" value="${item.quantity}" min="1" onchange="updateQuantityFromInput(this.value)">
+      <button class="quantity-btn" onclick="updateQuantity(1)">+</button>
+      <span style="margin-left: 1rem; font-weight: 600;">${item.unit}(s)</span>
+    </div>
+
+    <div class="purchase-total">
+      <div class="total-row">
+        <span class="total-label">Subtotal:</span>
+        <span class="total-amount">₦${(item.price * item.quantity).toLocaleString()}</span>
+      </div>
+      <div class="total-row">
+        <span class="total-label">Delivery:</span>
+        <span style="color: #059669; font-weight: 600;">Free</span>
+      </div>
+      <div class="total-row" style="border-top: 1px solid #e2e8f0; padding-top: 0.5rem; margin-top: 0.5rem;">
+        <span class="total-label" style="font-size: 1.1rem;">Total:</span>
+        <span class="total-amount" style="font-size: 1.3rem;">₦${total.toLocaleString()}</span>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+// Hide purchase modal
+function hidePurchaseModal() {
+  const modal = document.getElementById('purchaseModal');
+  modal.classList.remove('show');
+  document.body.style.overflow = '';
+  currentPurchaseItem = null;
+}
+
+// Update quantity
+function updateQuantity(change) {
+  if (!currentPurchaseItem) return;
+
+  const newQuantity = Math.max(1, currentPurchaseItem.quantity + change);
+  currentPurchaseItem.quantity = newQuantity;
+  document.getElementById('purchaseQuantity').value = newQuantity;
+
+  // Update total
+  const total = currentPurchaseItem.price * newQuantity;
+  const totalElement = document.querySelector('.total-amount');
+  if (totalElement) {
+    totalElement.textContent = `₦${total.toLocaleString()}`;
+  }
+
+  // Update subtotal
+  const subtotalElement = document.querySelectorAll('.total-amount')[0];
+  if (subtotalElement) {
+    subtotalElement.textContent = `₦${total.toLocaleString()}`;
+  }
+}
+
+// Update quantity from input
+function updateQuantityFromInput(value) {
+  const quantity = Math.max(1, parseInt(value) || 1);
+  currentPurchaseItem.quantity = quantity;
+  updateQuantity(0); // Refresh display
+}
+
+// Confirm purchase and redirect to checkout
+function confirmPurchase() {
+  console.log('confirmPurchase called, currentPurchaseItem:', currentPurchaseItem);
+
+  if (!currentPurchaseItem) {
+    console.error('No purchase item selected');
+    return;
+  }
+
+  // Store item details before hiding modal (since hidePurchaseModal sets currentPurchaseItem to null)
+  const itemDetails = {
+    quantity: currentPurchaseItem.quantity,
+    unit: currentPurchaseItem.unit,
+    name: currentPurchaseItem.name
+  };
+
+  // Store purchase data in session/localStorage for checkout
+  const purchaseData = {
+    type: 'mineral',
+    item: currentPurchaseItem,
+    timestamp: new Date().toISOString()
+  };
+
+  localStorage.setItem('folsme_purchase', JSON.stringify(purchaseData));
+  console.log('Purchase data stored:', purchaseData);
+
+  hidePurchaseModal();
+
+  // Show success message using stored details
+  showNotification(`Added ${itemDetails.quantity} ${itemDetails.unit}(s) of ${itemDetails.name} to cart!`, 'success');
+
+  // Redirect to checkout immediately
+  console.log('Redirecting to checkout.html...');
+  setTimeout(() => {
+    window.location.href = 'checkout.html';
+  }, 100);
+}
+
+// Show notification
+function showNotification(message, type = 'info') {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `notification notification-${type}`;
+  notification.innerHTML = `
+    <div class="notification-content">
+      <span class="notification-icon">${type === 'success' ? '✅' : 'ℹ️'}</span>
+      <span class="notification-message">${message}</span>
+    </div>
+  `;
+
+  // Add styles
+  notification.style.cssText = `
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: ${type === 'success' ? '#10b981' : '#3b82f6'};
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10001;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    max-width: 400px;
+  `;
+
+  document.body.appendChild(notification);
+
+  // Animate in
+  setTimeout(() => {
+    notification.style.transform = 'translateX(0)';
+  }, 100);
+
+  // Remove after 4 seconds
+  setTimeout(() => {
+    notification.style.transform = 'translateX(100%)';
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.parentNode.removeChild(notification);
+      }
+    }, 300);
+  }, 4000);
+}
+
+// Handle mineral inquiry
+function inquireMineral(name) {
+  const message = `Hi, I'm interested in purchasing ${name}. Please provide more details about availability, pricing, and delivery options.`;
+  const whatsappUrl = `https://wa.me/2347035589713?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+}
+
+// Handle sell mineral button click
+function sellMineral(mineralName) {
+  // Pre-fill the mineral type in the sell form
+  const mineralTypeSelect = document.getElementById('mineralType');
+  if (mineralTypeSelect) {
+    // Map mineral names to select values
+    const mineralMap = {
+      'Gold': 'gold',
+      'Iron Ore': 'iron-ore',
+      'Barite & Barytes': 'barite',
+      'Coal / Lignite': 'coal',
+      'Gypsum & Limestone': 'gypsum',
+      'Kaolin & Clay Minerals': 'kaolin',
+      'Bitumen / Asphalt': 'bitumen',
+      'Lead & Zinc Ores': 'zinc'
+    };
+
+    const selectValue = mineralMap[mineralName];
+    if (selectValue) {
+      mineralTypeSelect.value = selectValue;
+    }
+  }
+
+  // Smooth scroll to sell form
+  const sellSection = document.getElementById('sell-minerals');
+  if (sellSection) {
+    sellSection.scrollIntoView({ behavior: 'smooth' });
+
+    // Highlight the form briefly
+    const form = document.getElementById('sellMineralsForm');
+    if (form) {
+      form.style.boxShadow = '0 0 0 3px rgba(245, 158, 11, 0.3)';
+      setTimeout(() => {
+        form.style.boxShadow = '';
+      }, 2000);
+    }
+  }
+}
+
+// Handle sell minerals form
+async function handleSellMinerals(e) {
+  e.preventDefault();
+
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+
+  // Show loading state
+  const submitBtn = e.target.querySelector('button[type="submit"]');
+  const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Submitting...';
+  submitBtn.disabled = true;
+
+  try {
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    // Store sell inquiry data for checkout
+    const sellData = {
+      type: 'sell_inquiry',
+      inquiry: {
+        sellerName: data.sellerName,
+        sellerEmail: data.sellerEmail,
+        sellerPhone: data.sellerPhone,
+        mineralType: data.mineralType,
+        quantity: data.quantity,
+        location: data.location,
+        description: data.description,
+        expectedPrice: data.expectedPrice,
+        samplePhoto: data.samplePhoto ? 'Uploaded' : 'No sample provided',
+        submittedAt: new Date().toISOString()
+      }
+    };
+
+    localStorage.setItem('folsme_sell_inquiry', JSON.stringify(sellData));
+
+    // Show success message
+    showNotification(`Thank you for your submission, ${data.sellerName}! Your mineral selling inquiry has been received.`, 'success');
+
+    // Reset form
+    resetSellForm();
+
+    // Redirect to checkout after a short delay
+    setTimeout(() => {
+      window.location.href = 'checkout.html';
+    }, 2000);
+
+  } catch (error) {
+    alert('There was an error submitting your request. Please try again or contact us directly.');
+  } finally {
+    submitBtn.textContent = originalText;
+    submitBtn.disabled = false;
+  }
+}
+
+// Preview sample photo
+function previewSample(input) {
+  const preview = document.getElementById('samplePreview');
+  const image = document.getElementById('sampleImage');
+
+  if (input.files && input.files[0]) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+      image.src = e.target.result;
+      preview.style.display = 'block';
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    preview.style.display = 'none';
+  }
+}
+
+// Reset sell form
+function resetSellForm() {
+  document.getElementById('sellMineralsForm').reset();
+  document.getElementById('samplePreview').style.display = 'none';
+}
+
+  </script>
+
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>

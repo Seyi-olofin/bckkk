@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FOLSME Admin</title>
+  <link rel="stylesheet" href="admin.css" />
+  <link rel="icon" href="../images/logo.png" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="admin-app">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <div class="logo">
+          <img src="../images/logo.png" alt="FOLSME" />
+        </div>
+        <div class="brand-text">
+          <div class="brand-title" style="color: white;">FOLSME</div>
+          <div class="brand-subtitle" style="color: white;">Admin Panel</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#overview" class="nav-link active" data-section="overview">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 7V5C3 4.44772 3.44772 4 4 4H20C20.5523 4 21 4.44772 21 5V7M3 7V19C3 19.5523 3.44772 20 4 20H20C20.5523 20 21 19.5523 21 19V7M3 7H21M12 11V15M9 13H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Overview</span>
+        </a>
+
+        <a href="#orders" class="nav-link" data-section="orders">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H12L17 8V19C17 20.1046 16.1046 21 15 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Orders</span>
+        </a>
+
+        <a href="#products" class="nav-link" data-section="products">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 7L12 13L4 7M4 7L12 1L20 7M4 7V17L12 23L20 17V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Products</span>
+        </a>
+
+        <a href="#customers" class="nav-link" data-section="customers">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M12 11C13.6569 11 15 9.65685 15 8C15 6.34315 13.6569 5 12 5C10.3431 5 9 6.34315 9 8C9 9.65685 10.3431 11 12 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Customers</span>
+        </a>
+
+        <a href="#analytics" class="nav-link" data-section="analytics">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 19V13C9 11.8954 9.89543 11 11 11H15M9 19C9 20.1046 8.10457 21 7 21C5.89543 21 5 20.1046 5 19C5 17.8954 5.89543 17 7 17C8.10457 17 9 17.8954 9 19ZM9 19H15M15 19C15 20.1046 15.8954 21 17 21C18.1046 21 19 20.1046 19 19C19 17.8954 18.1046 17 17 17C15.8954 17 15 17.8954 15 19ZM15 11V19M15 11C15 9.89543 15.8954 9 17 9C18.1046 9 19 9.89543 19 11V19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Analytics</span>
+        </a>
+
+        <a href="#finance" class="nav-link" data-section="finance">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 10H21M7 15H7.01M11 15H13M3 7C3 6.46957 3.44772 5.96086 3.58579 5.58579C3.96086 5.21071 4.46957 5 5 5H19C19.5304 5 20.0391 5.21071 20.4142 5.58579C20.7893 5.96086 21 6.46957 21 7V17C21 17.5304 20.7893 18.0391 20.4142 18.4142C20.0391 18.7893 19.5304 19 19 19H5C4.46957 19 3.96086 18.7893 3.58579 18.4142C3.21071 18.0391 3 17.5304 3 17V7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Finance</span>
+        </a>
+
+        <a href="#content" class="nav-link" data-section="content">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M11 5H6C4.89543 5 4 5.89543 4 7V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V14M17 8L12 3M12 3L17 8M12 3V15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Content</span>
+        </a>
+
+        <a href="#settings" class="nav-link" data-section="settings">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Settings</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button id="logoutBtn" class="logout-btn" style="background: rgba(239, 68, 68, 0.08); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.2); padding: 0.75rem 1rem; font-size: 0.875rem; border-radius: 8px; transition: all 0.3s ease; margin-top: 1rem;">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 16px; height: 16px;">
+            <path d="M17 16L21 12M21 12L17 8M21 12H9M13 16V17C13 18.1046 12.1046 19 11 19H6C4.89543 19 4 18.1046 4 17V7C4 5.89543 4.89543 5 6 5H11C12.1046 5 13 5.89543 13 7V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span style="margin-left: 0.5rem;">Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="main-content">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle" id="menuToggle">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 6H20M4 12H20M4 18H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="search-container">
+            <input type="text" placeholder="Search orders, products..." class="search-input" id="searchInput" />
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 21L16.5 16.5M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="topbar-right">
+          <div class="user-info">
+            <span class="user-greeting">Welcome, <strong id="adminName">Admin</strong></span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Overview Section -->
+      <section id="overview" class="section active">
+        <div class="overview-header">
+          <h1 class="section-title">Dashboard</h1>
+          <div class="overview-actions">
+            <button class="btn btn-secondary">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 10V12M12 16H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Help
+            </button>
+            <button class="btn btn-primary" id="themeToggle">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span id="themeToggleText">Dark Mode</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="overview-grid">
+          <div class="overview-card primary">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 12H15M9 16H15M17 21H7C5.89543 21 5 20.1046 5 19V5C5 3.89543 5.89543 3 7 3H12L17 8V19C17 20.1046 16.1046 21 15 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="stat-orders">—</h3>
+              <p class="card-label">Total Orders</p>
+              <span class="card-change positive">+12.5%</span>
+            </div>
+          </div>
+
+          <div class="overview-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8C13.6569 8 15 6.65685 15 5C15 3.34315 13.6569 2 12 2C10.3431 2 9 3.34315 9 5C9 6.65685 10.3431 8 12 8ZM12 8V22M9 14H15" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="stat-revenue">—</h3>
+              <p class="card-label">Revenue</p>
+              <span class="card-change positive">+15.3%</span>
+            </div>
+          </div>
+
+          <div class="overview-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 8V4L20 2V6L12 8ZM12 8L4 6V2L12 4V8ZM12 8V16M12 16L4 14V10L12 12V16ZM12 16L20 14V10L12 12V16Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="stat-pending">—</h3>
+              <p class="card-label">Pending</p>
+              <span class="card-change negative">-5.2%</span>
+            </div>
+          </div>
+
+          <div class="overview-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 20H7C5.89543 20 5 19.1046 5 18V9C5 7.89543 5.89543 7 7 7H17C18.1046 7 19 7.89543 19 9V18C19 19.1046 18.1046 20 17 20ZM17 20V16C17 14.8954 16.1046 14 15 14C13.8954 14 13 14.8954 13 16V20M17 7V5C17 3.89543 16.1046 3 15 3H9C7.89543 3 7 3.89543 7 5V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="stat-customers">—</h3>
+              <p class="card-label">Customers</p>
+              <span class="card-change positive">+8.2%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="overview-charts">
+          <div class="chart-card">
+            <div class="chart-header">
+              <h3>Revenue Overview</h3>
+              <select class="chart-select">
+                <option>Last 7 days</option>
+                <option>Last 30 days</option>
+                <option>Last 3 months</option>
+              </select>
+            </div>
+            <div class="chart-placeholder">
+              <div class="chart-bar" style="height: 60%; animation-delay: 0.1s;"></div>
+              <div class="chart-bar" style="height: 80%; animation-delay: 0.2s;"></div>
+              <div class="chart-bar" style="height: 45%; animation-delay: 0.3s;"></div>
+              <div class="chart-bar" style="height: 70%; animation-delay: 0.4s;"></div>
+              <div class="chart-bar" style="height: 55%; animation-delay: 0.5s;"></div>
+              <div class="chart-bar" style="height: 90%; animation-delay: 0.6s;"></div>
+              <div class="chart-bar" style="height: 65%; animation-delay: 0.7s;"></div>
+            </div>
+          </div>
+
+          <div class="activity-card">
+            <div class="activity-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <div id="recent-activity-list" class="activity-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Orders Section -->
+      <section id="orders" class="section">
+        <div class="section-header">
+          <h1 class="section-title">Orders</h1>
+          <div class="section-actions">
+            <div class="search-input-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L16.5 16.5M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <input type="text" placeholder="Search orders..." id="ordersSearch" />
+            </div>
+            <select class="filter-select" id="ordersFilter">
+              <option value="all">All Orders</option>
+              <option value="pending">Pending</option>
+              <option value="completed">Completed</option>
+              <option value="shipped">Shipped</option>
+            </select>
+            <button class="btn btn-primary" id="addOrderBtn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              New Order
+            </button>
+          </div>
+        </div>
+
+        <div class="table-container">
+          <table class="data-table" id="orders-table">
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Amount</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody">
+              <!-- Orders will be populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Products Section -->
+      <section id="products" class="section">
+        <div class="section-header">
+          <h1 class="section-title">Products</h1>
+          <div class="section-actions">
+            <div class="search-input-wrapper">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 21L16.5 16.5M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <input type="text" placeholder="Search products..." id="productsSearch" />
+            </div>
+            <select class="filter-select" id="productsFilter">
+              <option value="all">All Products</option>
+              <option value="generators">Generators</option>
+              <option value="minerals">Minerals</option>
+              <option value="active">Active</option>
+            </select>
+            <button class="btn btn-primary" id="addProductBtn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              Add Product
+            </button>
+          </div>
+        </div>
+
+        <div class="products-grid" id="products-grid"></div>
+      </section>
+
+      <!-- Finance Section -->
+      <section id="finance" class="section">
+        <div class="section-header">
+          <h1 class="section-title">Finance</h1>
+          <div class="section-actions">
+            <select class="filter-select" id="financeFilter">
+              <option value="all">All Transactions</option>
+              <option value="deposits">Deposits</option>
+              <option value="withdrawals">Withdrawals</option>
+              <option value="pending">Pending</option>
+            </select>
+            <button class="btn btn-primary" id="addWalletBtn">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              New Transaction
+            </button>
+          </div>
+        </div>
+
+        <div class="finance-overview">
+          <div class="overview-card primary">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 10H21M7 15H7.01M11 15H13M3 7C3 6.46957 3.44772 5.96086 3.58579 5.58579C3.96086 5.21071 4.46957 5 5 5H19C19.5304 5 20.0391 5.21071 20.4142 5.58579C20.7893 5.96086 21 6.46957 21 7V17C21 17.5304 20.7893 18.0391 20.4142 18.4142C20.0391 18.7893 19.5304 19 19 19H5C4.46957 19 3.96086 18.7893 3.58579 18.4142C3.21071 18.0391 3 17.5304 3 17V7Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="totalBalance">₦0</h3>
+              <p class="card-label">Total Balance</p>
+              <span class="card-change positive">+2.4%</span>
+            </div>
+          </div>
+
+          <div class="overview-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 12L12 17L22 7M2 12L7 17L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="monthlyDeposits">₦0</h3>
+              <p class="card-label">This Month</p>
+              <span class="card-change positive">+15.7%</span>
+            </div>
+          </div>
+
+          <div class="overview-card">
+            <div class="card-icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17 9L7 19M7 9L17 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div class="card-content">
+              <h3 class="card-value" id="pendingApprovals">0</h3>
+              <p class="card-label">Pending</p>
+              <span class="card-change neutral">0%</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="finance-content">
+          <div class="transactions-card">
+            <div class="card-header">
+              <h3>Recent Transactions</h3>
+            </div>
+            <div id="transactions-history" class="transactions-list"></div>
+          </div>
+
+          <div class="quick-actions-card">
+            <div class="card-header">
+              <h3>Quick Actions</h3>
+            </div>
+            <div class="action-buttons">
+              <button class="action-btn primary" id="depositBtn">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M7 12L12 17L22 7M2 12L7 17L12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Deposit</span>
+              </button>
+              <button class="action-btn secondary" id="withdrawBtn">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 9L7 19M7 9L17 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Withdraw</span>
+              </button>
+              <button class="action-btn tertiary" id="transferBtn">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 9L7 19M7 9L17 19M12 2V22" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Transfer</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Analytics Section -->
+      <section id="analytics" class="section">
+        <h1 class="section-title">Analytics Dashboard</h1>
+        <div class="analytics-content">
+          <!-- Key Metrics Row -->
+          <div class="analytics-metrics">
+            <div class="metric-card">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <h3 class="metric-value" id="analytics-total-sales">—</h3>
+                <p class="metric-label">Generator Sales</p>
+                <span class="metric-change positive">+12.5%</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M17 20H7C5.89543 20 5 19.1046 5 18V9C5 7.89543 5.89543 7 7 7H17C18.1046 7 19 7.89543 19 9V18C19 19.1046 18.1046 20 17 20ZM17 20V16C17 14.8954 16.1046 14 15 14C13.8954 14 13 14.8954 13 16V20M17 7V5C17 3.89543 16.1046 3 15 3H9C7.89543 3 7 3.89543 7 5V7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <h3 class="metric-value" id="analytics-customers">—</h3>
+                <p class="metric-label">Active Customers</p>
+                <span class="metric-change positive">+8.2%</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 8C13.6569 8 15 6.65685 15 5C15 3.34315 13.6569 2 12 2C10.3431 2 9 3.34315 9 5C9 6.65685 10.3431 8 12 8ZM12 8V22M9 14H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <h3 class="metric-value" id="analytics-revenue">—</h3>
+                <p class="metric-label">Revenue</p>
+                <span class="metric-change positive">+15.3%</span>
+              </div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <div class="metric-content">
+                <h3 class="metric-value" id="analytics-conversion">—</h3>
+                <p class="metric-label">Conversion Rate</p>
+                <span class="metric-change negative">-2.1%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Row -->
+          <div class="analytics-charts">
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Generator Sales Overview</h3>
+                <select class="chart-period" id="salesPeriod">
+                  <option>Last 7 days</option>
+                  <option>Last 30 days</option>
+                  <option>Last 3 months</option>
+                </select>
+              </div>
+              <div class="chart-container">
+                <canvas id="salesChart" width="400" height="200"></canvas>
+                <div class="chart-placeholder" style="display: none;">
+                  <div class="chart-bar animated" style="height: 40%; animation-delay: 0.1s;"></div>
+                  <div class="chart-bar animated" style="height: 65%; animation-delay: 0.2s;"></div>
+                  <div class="chart-bar animated" style="height: 45%; animation-delay: 0.3s;"></div>
+                  <div class="chart-bar animated" style="height: 80%; animation-delay: 0.4s;"></div>
+                  <div class="chart-bar animated" style="height: 55%; animation-delay: 0.5s;"></div>
+                  <div class="chart-bar animated" style="height: 70%; animation-delay: 0.6s;"></div>
+                  <div class="chart-bar animated" style="height: 60%; animation-delay: 0.7s;"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-header">
+                <h3>Sales by Category</h3>
+              </div>
+              <div class="pie-chart-placeholder">
+                <div class="pie-segment" style="background: var(--primary-color); flex: 50;"></div>
+                <div class="pie-segment" style="background: var(--secondary-color); flex: 30;"></div>
+                <div class="pie-segment" style="background: var(--accent-color); flex: 20;"></div>
+              </div>
+              <div class="chart-legend">
+                <div class="legend-item">
+                  <span class="legend-color" style="background: var(--primary-color);"></span>
+                  <span>Generators (50%)</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background: var(--secondary-color);"></span>
+                  <span>Minerals (30%)</span>
+                </div>
+                <div class="legend-item">
+                  <span class="legend-color" style="background: var(--accent-color);"></span>
+                  <span>Equipment (20%)</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="analytics-activity">
+            <h3>Recent Sales Activity</h3>
+            <div class="activity-timeline" id="sales-activity-list">
+              <!-- Activity items will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Content Management Section -->
+      <section id="content" class="section">
+        <h1 class="section-title">Content Management</h1>
+        <div class="content-management">
+          <!-- Content Tabs -->
+          <div class="content-tabs">
+            <button class="content-tab active" data-tab="generators">Generators</button>
+            <button class="content-tab" data-tab="minerals">Minerals</button>
+            <button class="content-tab" data-tab="news">News & Updates</button>
+          </div>
+
+          <!-- Generators Content -->
+          <div id="generators-content" class="content-tab-content active">
+            <div class="content-header">
+              <h2>Generator Products</h2>
+              <button class="btn btn-primary" id="addGeneratorBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Add Generator
+              </button>
+            </div>
+            <div class="content-grid" id="generators-grid">
+              <!-- Generator items will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Minerals Content -->
+          <div id="minerals-content" class="content-tab-content">
+            <div class="content-header">
+              <h2>Mineral Resources</h2>
+              <button class="btn btn-primary" id="addMineralBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Add Mineral
+              </button>
+            </div>
+            <div class="content-grid" id="minerals-grid">
+              <!-- Mineral items will be populated by JavaScript -->
+            </div>
+          </div>
+
+          <!-- News Content -->
+          <div id="news-content" class="content-tab-content">
+            <div class="content-header">
+              <h2>News & Updates</h2>
+              <button class="btn btn-primary" id="addNewsBtn">
+                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 4V20M20 12H4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Add News
+              </button>
+            </div>
+            <div class="content-list" id="news-list">
+              <!-- News items will be populated by JavaScript -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Settings Section -->
+      <section id="settings" class="section">
+        <div class="section-header">
+          <h1 class="section-title">Settings</h1>
+        </div>
+
+        <div class="settings-container">
+          <!-- Profile Settings -->
+          <div class="settings-card">
+            <div class="settings-header">
+              <h3>Profile Settings</h3>
+              <p>Update your personal information and preferences</p>
+            </div>
+            <form id="profileForm" class="settings-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="adminName">Full Name</label>
+                  <input type="text" id="adminName" name="name" required />
+                </div>
+                <div class="form-group">
+                  <label for="adminEmail">Email Address</label>
+                  <input type="email" id="adminEmail" name="email" required />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Update Profile</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Password Settings -->
+          <div class="settings-card">
+            <div class="settings-header">
+              <h3>Change Password</h3>
+              <p>Ensure your account is secure with a strong password</p>
+            </div>
+            <form id="passwordForm" class="settings-form">
+              <div class="form-group">
+                <label for="currentPassword">Current Password</label>
+                <input type="password" id="currentPassword" name="currentPassword" required />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="newPassword">New Password</label>
+                  <input type="password" id="newPassword" name="newPassword" required minlength="8" />
+                  <small class="form-hint">Must contain at least 8 characters with uppercase, lowercase, number, and special character</small>
+                </div>
+                <div class="form-group">
+                  <label for="confirmPassword">Confirm New Password</label>
+                  <input type="password" id="confirmPassword" name="confirmPassword" required minlength="8" />
+                </div>
+              </div>
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Change Password</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Security Settings -->
+          <div class="settings-card">
+            <div class="settings-header">
+              <h3>Security Settings</h3>
+              <p>Manage your account security and access</p>
+            </div>
+            <div class="security-options">
+              <div class="security-option">
+                <div class="option-info">
+                  <h4>Two-Factor Authentication</h4>
+                  <p>Add an extra layer of security to your account</p>
+                </div>
+                <button class="btn btn-secondary" disabled>Coming Soon</button>
+              </div>
+              <div class="security-option">
+                <div class="option-info">
+                  <h4>Facial Recognition</h4>
+                  <p>Enable facial recognition for quick login</p>
+                </div>
+                <button class="btn btn-secondary" disabled>Coming Soon</button>
+              </div>
+              <div class="security-option">
+                <div class="option-info">
+                  <h4>Login History</h4>
+                  <p>View recent login activity</p>
+                </div>
+                <button class="btn btn-ghost" id="viewLoginHistory">View History</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Admin Login</h2>
+        </div>
+        <form id="loginForm" class="modal-form">
+          <div class="form-group">
+            <label for="loginUsername">Email</label>
+            <input type="email" id="loginUsername" required autocomplete="username" placeholder="admin@folsme.com" />
+          </div>
+          <div class="form-group">
+            <label for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" required autocomplete="current-password" placeholder="Admin@2024!" />
+          </div>
+          <div class="login-info">
+            <small>Default credentials: admin@folsme.com / Admin@2024!</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Login</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div id="productModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="productModalTitle">Add Product</h2>
+          <button class="modal-close" id="productModalClose">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <form id="productForm" class="modal-form">
+          <input type="hidden" id="productId" />
+          <div class="form-group">
+            <label for="productName">Name</label>
+            <input type="text" id="productName" required />
+          </div>
+          <div class="form-group">
+            <label for="productPrice">Price (₦)</label>
+            <input type="number" id="productPrice" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <textarea id="productDescription"></textarea>
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="productCancelBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Wallet Modal -->
+    <div id="walletModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="walletModalTitle">Add New Wallet</h2>
+          <button class="modal-close" id="walletModalClose">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <form id="walletForm" class="modal-form">
+          <div class="form-group">
+            <label for="walletOwner">Owner Name</label>
+            <input type="text" id="walletOwner" required placeholder="Enter wallet owner name" />
+          </div>
+          <div class="form-group">
+            <label for="walletCurrency">Currency</label>
+            <select id="walletCurrency" required>
+              <option value="NGN">NGN (₦)</option>
+              <option value="USD">USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="initialBalance">Initial Balance (optional)</label>
+            <input type="number" id="initialBalance" step="0.01" placeholder="0.00" />
+          </div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" id="walletCancelBtn">Cancel</button>
+            <button type="submit" class="btn btn-primary">Create Wallet</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Approval Modal for Withdrawals -->
+    <div id="approvalModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Approve Withdrawal</h2>
+          <button class="modal-close" id="approvalModalClose">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 18L18 6M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <form id="approvalForm" class="modal-form">
+          <div class="form-group">
+            <label for="approvalPassword">Approval Password</label>
+            <input type="password" id="approvalPassword" required />
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Approve</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Toasts -->
+    <div id="toasts" class="toasts-container"></div>
+  </div>
+  <!-- Chart.js for advanced charts (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
