@@ -228,7 +228,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Helper function to get API base URL
   function getApiBaseUrl() {
-    return window.location.hostname === 'localhost' ? '' : 'https://backyymii.onrender.com'; // Your Render backend URL
+    return window.location.hostname === 'localhost' ? '' : 'https://bckkk-gx7p.onrender.com'; // Your Render backend URL
   }
 
   async function checkAuthentication() {
