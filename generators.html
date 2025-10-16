@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Generators | FOLSME International</title>
+<script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- GLightbox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+<!-- GSAP CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styless.css" />
+  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="nav.css" />
+
+  <style>
+    /* Generator specific styles */
+    .gen-hero {
+      position: relative;
+      height: 70vh;
+      width: 100%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: url('images/hero-energy.jpeg') no-repeat center center/cover;
+    }
+
+    .gen-hero .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+      z-index: 1;
+    }
+
+    .gen-hero .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+
+    .gen-hero-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      position: relative;
+      text-align: center;
+      z-index: 2;
+      background: linear-gradient(90deg, #ffffff00, #ff4b2b, #fff);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmerMove 3s linear infinite;
+    }
+
+    @keyframes shimmerMove {
+      to { background-position: 200% center; }
+    }
+
+    .gen-hero-subtitle {
+      font-size: 1.2rem;
+      margin-top: 1rem;
+      color: #f1f1f1;
+    }
+
+    /* Filters */
+    .gen-filters {
+      padding: 40px 20px;
+      text-align: center;
+      background: #f9f9f9;
+    }
+
+    .gen-filter-btn {
+      background: #fff;
+      border: 2px solid #004080;
+      color: #7a93ac;
+      padding: 10px 20px;
+      margin: -900PX 10px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+
+    .gen-filter-btn.active, .gen-filter-btn:hover {
+      background: #004080;
+      color: #fff;
+    }
+
+    /* Grid */
+    .gen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 40px 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gen-card {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .gen-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .gen-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .gen-card-content {
+      padding: 1.5rem;
+    }
+
+    .gen-card-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: #004080;
+    }
+
+    .gen-card-power {
+      font-size: 1rem;
+      color: #d62828;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .gen-card-fuel {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .gen-card-features ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 1rem;
+    }
+
+    .gen-card-features li {
+      font-size: 0.9rem;
+      margin-bottom: 0.3rem;
+      padding-left: 15px;
+      position: relative;
+    }
+
+    .gen-card-features li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #d62828;
+    }
+
+    .gen-card-usage {
+      font-size: 0.9rem;
+      color: #333;
+      margin-bottom: 1rem;
+      font-style: italic;
+    }
+
+    .gen-card-btn {
+       background: #ff3b30;
+       color: #fff;
+       padding: 10px 20px;
+       border: none;
+       border-radius: 5px;
+       cursor: pointer;
+       font-weight: 600;
+       transition: background 0.3s;
+       width: 100%;
+       text-decoration: none;
+       display: inline-block;
+       text-align: center;
+     }
+
+     .gen-card-btn:hover {
+       background: #e6352a;
+     }
+
+    /* Highlights */
+    .gen-highlights {
+      background: #8B0000;
+      color: #fff;
+      padding: 80px 20px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 80px;
+    }
+
+    .gen-highlights h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      margin-top: -30px;
+    }
+
+    .gen-highlights-carousel-wrapper {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+
+    .gen-highlights-carousel {
+      display: flex;
+      gap: 2rem;
+      animation: scrollHighlights 30s linear infinite;
+      width: calc(200px * 8 + 2rem * 7); /* Adjust based on item width */
+    }
+
+    .gen-highlights-carousel:hover {
+      animation-play-state: paused;
+    }
+
+    .gen-highlight-item {
+      flex: 0 0 250px;
+      padding: 2rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .gen-highlight-item:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    }
+
+    .gen-highlight-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .gen-highlight-item p {
+      font-size: 1rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    @keyframes scrollHighlights {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Mobile: enable autoscroll and touch scrolling */
+    @media (max-width: 768px) {
+      .gen-highlights-carousel {
+        animation: scrollHighlights 30s linear infinite;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
+      }
+
+      .gen-highlight-item {
+        flex: 0 0 280px;
+        scroll-snap-align: start;
+      }
+    }
+
+    /* CTA Form */
+    .gen-cta {
+      padding: 80px 20px;
+      background: #f9f9f9;
+      margin-top: -20px;
+    }
+
+    .gen-cta h2 {
+      text-align: center;
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 3rem;
+      color: #004080;
+    }
+
+    .gen-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .gen-form input,
+    .gen-form select,
+    .gen-form textarea {
+      padding: 12px 15px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    .gen-form textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .gen-form-btn {
+      background: #8B0000;
+      color: #fff;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .gen-form-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.7), transparent);
+      transition: all 0.5s;
+    }
+
+    .gen-form-btn:hover::before {
+      left: 100%;
+    }
+
+    .gen-form-btn:hover {
+      background: #a91e1e;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .gen-hero-title {
+        font-size: 2.5rem;
+      }
+      .gen-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      }
+      .gen-highlights h2,
+      .gen-cta h2 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gen-grid {
+        grid-template-columns: 1fr;
+      }
+      .gen-filter-btn {
+        display: block;
+        margin: 10px auto;
+        width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header id="folsme-nav">
+  <div class="folsme-container">
+    <div class="folsme-logo">
+      <img src="images/logo.svg" alt="FOLSME Logo">
+      <span>FOLSME international LTD</span>
+    </div>
+
+    <!-- Hamburger -->
+    <div id="folsme-hamburger" class="folsme-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav id="folsme-menu" class="folsme-menu">
+      <button id="folsme-close" class="folsme-close">&times;</button>
+      <ul>
+        <li><a href="index.html" >Home</a></li>
+        <li><a href="about.html">About</a></li>
+        
+        <li class="folsme-dropdown">
+          <a href="#" class="folsme-toggle">Services ▾</a>
+          <ul class="folsme-submenu">
+             <li><a href="mining.html">Mining</a></li>
+              <li><a href="energy.html">Magnetic Generators</a></li>
+            <li><a href="construction.html">Construction</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="oilgas.html">Oil & Gas</a></li>
+            <li><a href="trade.html">Trade & Commerce</a></li>
+          </ul>
+        </li>
+
+        <li><a href="generators.html" class="active">Generators</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+  <!-- Hero Section -->
+  <section class="gen-hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="gen-hero-title">Reliable Power Solutions Across Nigeria</h1>
+      <p class="gen-hero-subtitle">Small, Medium, Industrial, and Custom Generators for Every Need</p>
+    </div>
+  </section>
+
+  <!-- Filters -->
+  <section class="gen-filters">
+    <button class="gen-filter-btn active" data-filter="all">All Generators</button>
+    <button class="gen-filter-btn" data-filter="small">Small Generators</button>
+    <button class="gen-filter-btn" data-filter="medium">Medium Generators</button>
+    <button class="gen-filter-btn" data-filter="industrial">Industrial Generators</button>
+    <button class="gen-filter-btn" data-filter="custom">Custom Generators</button>
+  </section>
+
+  <!-- Generators Grid -->
+  <section class="gen-grid" id="genGrid">
+    <!-- Small Generators -->
+    <div class="gen-card" data-category="small">
+      <img src="images/generators/small-unit.jpeg" alt="Small Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Household Generator</h3>
+        <p class="gen-card-power">Power Output: 5 kW – 10 kW</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>Quiet operation</li>
+            <li>Zero emissions</li>
+            <li>Easy maintenance</li>
+            <li>Portable design</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Ideal for homes, small offices, and backup power.</p>
+        <a href="generator.html?id=household" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="gen-card" data-category="small">
+      <img src="images/generators/small-unit.jpg" alt="Compact Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Compact Backup Unit</h3>
+        <p class="gen-card-power">Power Output: 3 kW – 8 kW</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>Lightweight</li>
+            <li>Low noise</li>
+            <li>Automatic start</li>
+            <li>Continuous operation</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Perfect for residential use and small businesses.</p>
+        <a href="generator.html?id=compact" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Medium Generators -->
+    <div class="gen-card" data-category="medium">
+      <img src="images/generators/medium-unit.jpg" alt="Medium Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Commercial Generator</h3>
+        <p class="gen-card-power">Power Output: 50 kW – 150 kW</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>High efficiency</li>
+            <li>Remote monitoring</li>
+            <li>Durable build</li>
+            <li>Scalable capacity</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Suitable for offices, shops, and medium industries.</p>
+        <a href="generator.html?id=commercial" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="gen-card" data-category="medium">
+      <img src="images/generators/medium-unit.jpeg" alt="Business Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Business Power Unit</h3>
+        <p class="gen-card-power">Power Output: 60 kW – 120 kW</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>Reliable performance</li>
+            <li>Zero emissions</li>
+            <li>Easy installation</li>
+            <li>24/7 support</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Designed for commercial buildings and small factories.</p>
+        <a href="generator.html?id=business" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Industrial Generators -->
+    <div class="gen-card" data-category="industrial">
+      <img src="images/generators/industrial-unit.jpg" alt="Industrial Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Heavy Duty Generator</h3>
+        <p class="gen-card-power">Power Output: 240 kW – 500 kW</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>Industrial grade</li>
+            <li>Continuous operation</li>
+            <li>Advanced cooling</li>
+            <li>Redundant systems</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Built for large factories, data centers, and heavy industry.</p>
+        <a href="generator.html?id=heavy-duty" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="gen-card" data-category="industrial">
+      <img src="images/generators/industrial-unit.jpeg" alt="Factory Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Factory Power System</h3>
+        <p class="gen-card-power">Power Output: 300 kW – 1 MW</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>High capacity</li>
+            <li>Modular design</li>
+            <li>Smart controls</li>
+            <li>Energy efficient</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Essential for manufacturing plants and large operations.</p>
+        <a href="generator.html?id=factory" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <!-- Custom Generators -->
+    <div class="gen-card" data-category="custom">
+      <img src="images/generators/custom.jpg" alt="Custom Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Tailored Power Solution</h3>
+        <p class="gen-card-power">Power Output: Custom (up to 5 MW)</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>Bespoke design</li>
+            <li>Integrated systems</li>
+            <li>Specialized features</li>
+            <li>Expert consultation</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Custom-built for unique industrial and commercial needs.</p>
+        <a href="generator.html?id=tailored" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+
+    <div class="gen-card" data-category="custom">
+      <img src="images/generators/custom.jpeg" alt="Specialized Generator" class="gen-card-img glightbox">
+      <div class="gen-card-content">
+        <h3 class="gen-card-title">Specialized Energy Unit</h3>
+        <p class="gen-card-power">Power Output: Custom Specifications</p>
+        <p class="gen-card-fuel">Magnetic Generator Technology</p>
+        <div class="gen-card-features">
+          <ul>
+            <li>Application specific</li>
+            <li>Advanced technology</li>
+            <li>Custom integration</li>
+            <li>Performance optimized</li>
+          </ul>
+        </div>
+        <p class="gen-card-usage">Designed for specialized industrial applications.</p>
+        <a href="generator.html?id=specialized" class="gen-card-btn">Buy Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Highlights Section -->
+  <section class="gen-highlights">
+    <h2>Why Choose FOLSME Generators?</h2>
+    <div class="gen-highlights-carousel-wrapper">
+      <div class="gen-highlights-carousel">
+        <div class="gen-highlight-item">
+          <h3>24/7 Reliable Support</h3>
+          <p>Round-the-clock technical support and maintenance services across Nigeria.</p>
+        </div>
+        <div class="gen-highlight-item">
+          <h3>Nationwide Delivery</h3>
+          <p>Fast and secure delivery to any location in Nigeria with professional installation.</p>
+        </div>
+        <div class="gen-highlight-item">
+          <h3>Maintenance & Service</h3>
+          <p>Comprehensive maintenance packages and on-site service technicians.</p>
+        </div>
+        <div class="gen-highlight-item">
+          <h3>Premium Build Quality</h3>
+          <p>Industry-leading generators built to last with superior materials and engineering.</p>
+        </div>
+        <!-- Duplicate for seamless loop -->
+        <div class="gen-highlight-item">
+          <h3>24/7 Reliable Support</h3>
+          <p>Round-the-clock technical support and maintenance services across Nigeria.</p>
+        </div>
+        <div class="gen-highlight-item">
+          <h3>Nationwide Delivery</h3>
+          <p>Fast and secure delivery to any location in Nigeria with professional installation.</p>
+        </div>
+        <div class="gen-highlight-item">
+          <h3>Maintenance & Service</h3>
+          <p>Comprehensive maintenance packages and on-site service technicians.</p>
+        </div>
+        <div class="gen-highlight-item">
+          <h3>Premium Build Quality</h3>
+          <p>Industry-leading generators built to last with superior materials and engineering.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Form -->
+  <section class="gen-cta" id="quoteForm">
+    <h2>Get Your Generator Quote Today</h2>
+    <form class="gen-form" action="#" method="post">
+      <input type="text" name="name" placeholder="Full Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="phone" placeholder="Phone Number" required>
+      <select name="generator_type" required>
+        <option value="">Select Generator Type</option>
+        <option value="small">Small Generator</option>
+        <option value="medium">Medium Generator</option>
+        <option value="industrial">Industrial Generator</option>
+        <option value="custom">Custom Generator</option>
+      </select>
+      <textarea name="message" placeholder="Tell us about your power requirements..." required></textarea>
+      <button type="submit" class="gen-form-btn">Request Quote</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <!-- Contact Info -->
+      <div class="footer-section contact-info">
+        <h4>Contact Us</h4>
+        <p>
+          <a href="tel:+2347035589713" class="footer-link">
+            <img src="images/phone.svg" alt="Phone" /> +234 703 558 9713
+          </a><br>
+          <a href="mailto:folsmeinternational@gmail.com" class="footer-link">
+            <img src="images/email.svg" alt="Email" /> folsmeinternational@gmail.com
+          </a><br>
+          <a href="https://goo.gl/maps/xxxx" target="_blank" class="footer-link">
+            <img src="images/location.svg" alt="Location" /> Head Office: Osogbo | Mining Site: Erio-Ekiti
+          </a>
+        </p>
+      </div>
+
+      <div class="footer-row1">
+        <!-- Navigation Links -->
+        <div class="footer-section footer-nav">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="about.html" class="footer-link">About Us</a></li>
+            <li><a href="services.html" class="footer-link">Services</a></li>
+            <li><a href="#why-choose-us" class="footer-link">Why Choose Us</a></li>
+            <li><a href="contact.html" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services Links -->
+        <div class="footer-section footer-services">
+          <h4>Our Services</h4>
+          <ul>
+            <li><a href="services.html#mining" class="footer-link">Mining & Minerals</a></li>
+            <li><a href="energy.html" class="footer-link">Energy & Engineering</a></li>
+            <li><a href="construction.html" class="footer-link">Construction</a></li>
+            <li><a href="logistics.html" class="footer-link">Logistics</a></li>
+            <li><a href="oilgas.html" class="footer-link">Oil & Gas</a></li>
+            <li><a href="trade.html" class="footer-link">Trade & Commerce</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-row2">
+        <!-- Follow Us -->
+        <div class="footer-section footer-extra">
+          <h4>Follow Us</h4>
+          <p class="footer-socials">
+            <a href="https://wa.me/2347035589713" target="_blank" class="footer-link">
+              <img src="images/whatsapp.svg" alt="WhatsApp" />
+            </a>
+            <a href="#" target="_blank" class="footer-link">
+              <img src="images/linkedin.svg" alt="LinkedIn" />
+            </a>
+            <a href="#" target="_blank" class="footer-link">
+              <img src="images/facebook.svg" alt="Facebook" />
+            </a>
+          </p>
+        </div>
+
+        <!-- Newsletter -->
+        <div class="footer-section footer-newsletter-section">
+          <h4>Newsletter</h4>
+          <form class="footer-newsletter">
+            <input type="email" placeholder="Your email address" required />
+            <button type="submit">Subscribe</button>
+          </form>
+          <p class="newsletter-note">We respect your privacy. Your data is secure with us.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 FOLSME International. All Rights Reserved. Designed by Seyi Olofin</p>
+    </div>
+  </footer>
+
+  <script>
+    // Filter functionality
+    const filterButtons = document.querySelectorAll('.gen-filter-btn');
+    const genCards = document.querySelectorAll('.gen-card');
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        // Add active class to clicked button
+        button.classList.add('active');
+
+        const filterValue = button.getAttribute('data-filter');
+
+        genCards.forEach(card => {
+          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // GSAP Animations
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero animation
+    gsap.from(".gen-hero-title", {
+      duration: 1.2,
+      y: 50,
+      opacity: 0,
+      ease: "power3.out"
+    });
+    gsap.from(".gen-hero-subtitle", {
+      duration: 1.2,
+      delay: 0.3,
+      y: 40,
+      opacity: 0,
+      ease: "power3.out"
+    });
+
+    // Grid animations
+    gsap.from(".gen-card", {
+      scrollTrigger: {
+        trigger: ".gen-grid",
+        start: "top 80%"
+      },
+      opacity: 0,
+      y: 50,
+      stagger: 0.1,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // Highlights animations - only for initial load
+    gsap.from(".gen-highlights h2", {
+      scrollTrigger: {
+        trigger: ".gen-highlights",
+        start: "top 80%"
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1,
+      ease: "power3.out"
+    });
+
+    // CTA form animation
+    gsap.from(".gen-form", {
+      scrollTrigger: {
+        trigger: ".gen-cta",
+        start: "top 80%"
+      },
+      opacity: 0,
+      y: 50,
+      duration: 1.2,
+      ease: "power3.out"
+    });
+
+    // GLightbox
+    const lightbox = GLightbox({
+      selector: '.glightbox',
+      touchNavigation: true,
+      loop: true,
+      zoomable: true,
+      autoplayVideos: false,
+      closeButton: true,
+      openEffect: 'zoom',
+      closeEffect: 'fade',
+      slideEffect: 'slide',
+    });
+
+    // Smooth scroll to form
+    document.querySelectorAll('.gen-card-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.getElementById('quoteForm').scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+
+
+  <script src="script.js"></script>
+</body>
+</html>

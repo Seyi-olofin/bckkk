@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Household Generator | FOLSME International</title>
+  <script src="https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js"></script>
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pragati+Narrow&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- GLightbox CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styless.css" />
+  <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="nav.css" />
+  <style>
+    /* Cart Badge Styles */
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: #ff3b30;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+    }
+    
+    /* Product page styles */
+    .product-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 20px;
+      background-color: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    }
+
+    .breadcrumb {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 25px;
+      padding: 10px 15px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      display: inline-block;
+    }
+
+    .breadcrumb a {
+      color: #ff3b30;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: #e6352a;
+      text-decoration: underline;
+    }
+
+    .product-main {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 50px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .product-gallery {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .main-image {
+      width: 100%;
+      height: 450px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      transition: transform 0.5s ease;
+    }
+
+    .main-image:hover {
+      transform: scale(1.02);
+    }
+
+    .thumbnails {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 15px;
+    }
+
+    .thumbnail {
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .thumbnail:hover, .thumbnail.active {
+      border-color: #ff3b30;
+      transform: translateY(-5px);
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+    }
+
+    .product-info h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+      color: #004080;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    .product-info h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff3b30, #ff6b6b);
+      border-radius: 2px;
+    }
+
+    .product-price {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: #ff3b30;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .product-price::before {
+      content: '₦';
+      font-size: 1.8rem;
+      font-weight: 500;
+    }
+
+    .product-tagline {
+      font-size: 1.15rem;
+      color: #555;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      padding: 15px;
+      background: #f5f5f5;
+      border-left: 4px solid #ff3b30;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .purchase-options {
+      background: #f9f9f9;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin-top: auto;
+    }
+
+    .quantity-section {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      background: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .quantity-label {
+      font-weight: 600;
+      color: #333;
+      margin-right: auto;
+    }
+
+    .quantity-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f0f0f0;
+      border-radius: 8px;
+      padding: 5px;
+    }
+
+    .quantity-btn {
+      background: #fff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .quantity-btn:hover {
+      background: #ff3b30;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .quantity-input {
+      width: 60px;
+      text-align: center;
+      border: none;
+      background: transparent;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 0;
+    }
+
+    .btn-buy-now, .btn-add-cart {
+      padding: 16px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+
+    .btn-buy-now {
+      background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+      color: #fff;
+      flex: 1.5;
+      animation: gentlePulse 2s infinite;
+    }
+
+    .btn-buy-now::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .btn-buy-now:hover::before {
+      left: 100%;
+    }
+
+    .btn-buy-now:hover {
+      background: linear-gradient(135deg, #e6352a 0%, #ff5252 100%);
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(255, 59, 48, 0.4);
+    }
+
+    .btn-buy-now svg, .btn-add-cart svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    @keyframes gentlePulse {
+      0%, 100% { box-shadow: 0 8px 20px rgba(255, 59, 48, 0.3); }
+      50% { box-shadow: 0 8px 25px rgba(255, 59, 48, 0.5); }
+    }
+
+    .btn-add-cart {
+      background: #fff;
+      color: #ff3b30;
+      border: 2px solid #ff3b30;
+      flex: 1;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+
+    .btn-add-cart:hover {
+      background: #ff3b30;
+      color: #fff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 59, 48, 0.3);
+    }
+
+    .product-details {
+      margin-top: 60px;
+      background: #fff;
+      border-radius: 16px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+    
+    .product-details-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    
+    .product-details-header h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem;
+      color: #004080;
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .product-details-header h2::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: linear-gradient(90deg, #ff3b30, #ff6b6b);
+      border-radius: 2px;
+    }
+    
+    .product-details-header p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .detail-section {
+      margin-bottom: 25px;
+      border: none;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .detail-section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+    }
+
+    .detail-header {
+      background: linear-gradient(to right, #f9f9f9, #f5f5f5);
+      padding: 18px 25px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #333;
+      transition: all 0.3s ease;
+      border-left: 4px solid #ff3b30;
+    }
+
+    .detail-header:hover {
+      background: linear-gradient(to right, #f5f5f5, #f0f0f0);
+      color: #ff3b30;
+    }
+
+    .detail-toggle {
+      font-size: 1.2rem;
+      transition: transform 0.3s;
+      color: #ff3b30;
+      background: rgba(255, 59, 48, 0.1);
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+    
+    .detail-toggle.rotated {
+      transform: rotate(180deg);
+    }
+    
+    .detail-content {
+      padding: 25px;
+      display: none;
+      background: #fff;
+      line-height: 1.6;
+    }
+    
+    .detail-content.active {
+      display: block;
+    }
+
+    .detail-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-toggle.rotated {
+      transform: rotate(180deg);
+      background: rgba(255, 59, 48, 0.2);
+    }
+    
+    .detail-content ul {
+      padding-left: 20px;
+    }
+    
+    .detail-content ul li {
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 5px;
+    }
+    
+    .detail-content ul li strong {
+      color: #004080;
+      font-weight: 600;
+    }
+
+    .related-products {
+      margin-top: 60px;
+      text-align: center;
+      background: #fff;
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+      margin-top: 40px;
+    }
+
+    .related-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #f0f0f0;
+    }
+
+    .related-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .related-card-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .related-card img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .related-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .related-card-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+      color: white;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 4px 10px rgba(255, 59, 48, 0.3);
+    }
+
+    .related-card-content {
+      padding: 25px 20px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .related-card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 12px;
+      color: #004080;
+      font-weight: 600;
+    }
+
+    .related-card p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 25px;
+      line-height: 1.5;
+      flex-grow: 1;
+    }
+
+    .related-card-btn {
+      color: #fff;
+      background: linear-gradient(135deg, #ff3b30 0%, #ff6b6b 100%);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.2);
+    }
+
+    .related-card-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(255, 59, 48, 0.3);
+      text-decoration: none;
+    }
+
+    /* Cart Icon Styles */
+    .cart-icon-container {
+      position: relative;
+      margin-right: 20px;
+    }
+
+    .cart-icon-link {
+      text-decoration: none;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .cart-icon-link:hover {
+      transform: scale(1.1);
+    }
+
+    .cart-icon {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 59, 48, 0.1);
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+
+    .cart-icon:hover {
+      background: rgba(255, 59, 48, 0.2);
+      box-shadow: 0 4px 15px rgba(255, 59, 48, 0.3);
+    }
+
+    .cart-icon svg {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+    }
+
+    .cart-count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ff3b30;
+      color: #fff;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      animation: cartBounce 0.6s ease;
+    }
+
+    @keyframes cartBounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-4px); }
+      60% { transform: translateY(-2px); }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 992px) {
+      .product-container {
+        padding: 20px 15px;
+      }
+      
+      .product-main {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 20px;
+      }
+      
+      .main-image {
+        height: 350px;
+      }
+      
+      .product-info h1 {
+        font-size: 2rem;
+      }
+      
+      .product-price {
+        font-size: 1.8rem;
+      }
+      
+      .product-price::before {
+        font-size: 1.5rem;
+      }
+      
+      .purchase-options {
+        padding: 20px;
+      }
+      
+      .quantity-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+      }
+      
+      .quantity-controls {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .action-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .btn-buy-now, .btn-add-cart {
+        width: 100%;
+      }
+      
+      .product-details {
+        padding: 20px;
+      }
+      
+      .detail-header {
+        padding: 15px 20px;
+        font-size: 1rem;
+      }
+      
+      .detail-content {
+        padding: 20px;
+      }
+      
+      .related-products {
+        padding: 30px 20px;
+      }
+      
+      .related-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .breadcrumb {
+        font-size: 0.85rem;
+        padding: 8px 12px;
+        width: 100%;
+      }
+      
+      .product-main {
+        padding: 15px;
+      }
+      
+      .main-image {
+        height: 280px;
+      }
+      
+      .thumbnails {
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+      
+      .thumbnail {
+        width: 70px;
+        height: 70px;
+      }
+      
+      .product-info h1 {
+        font-size: 1.8rem;
+      }
+      
+      .product-tagline {
+        font-size: 1rem;
+        padding: 12px;
+      }
+      
+      .product-details-header h2 {
+        font-size: 1.6rem;
+      }
+      
+      .product-details-header p {
+        font-size: 0.95rem;
+      }
+      
+      .detail-content ul li {
+        margin-bottom: 15px;
+      }
+      
+      .cart-icon-container {
+        margin-right: 10px;
+      }
+      
+      .cart-icon {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .cart-icon svg {
+        width: 18px;
+        height: 18px;
+      }
+      
+      .related-card-badge {
+        font-size: 0.75rem;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+<header id="folsme-nav">
+  <div class="folsme-container">
+    <div class="folsme-logo">
+      <img src="images/logo.svg" alt="FOLSME Logo">
+      <span>FOLSME international LTD</span>
+    </div>
+
+    <!-- Cart Icon -->
+    <div class="cart-icon-container">
+      <a href="cart.html" class="cart-icon-link">
+        <div class="cart-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M7 4V2C7 1.45 7.45 1 8 1H16C16.55 1 17 1.45 17 2V4H20C20.55 4 21 4.45 21 5S20.55 6 20 6H19V19C19 20.1 18.1 21 17 21H7C5.9 21 5 20.1 5 19V6H4C3.45 6 3 5.55 3 5S3.45 4 4 4H7ZM9 3V4H15V3H9ZM7 6V19H17V6H7Z" fill="currentColor"/>
+            <circle cx="9" cy="9" r="1" fill="currentColor"/>
+            <circle cx="15" cy="9" r="1" fill="currentColor"/>
+          </svg>
+          <span class="cart-badge" x-show="cartCount > 0" x-text="cartCount"></span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Hamburger -->
+    <div id="folsme-hamburger" class="folsme-hamburger">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Nav Links -->
+    <nav id="folsme-menu" class="folsme-menu">
+      <button id="folsme-close" class="folsme-close">&times;</button>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+
+        <li class="folsme-dropdown">
+          <a href="#" class="folsme-toggle">Services ▾</a>
+          <ul class="folsme-submenu">
+             <li><a href="mining.html">Mining</a></li>
+             <li><a href="energy.html">Magnetic Generators</a></li>
+            <li><a href="construction.html">Construction</a></li>
+            <li><a href="logistics.html">Logistics</a></li>
+            <li><a href="oilgas.html">Oil & Gas</a></li>
+            <li><a href="trade.html">Trade & Commerce</a></li>
+          </ul>
+        </li>
+
+        <li><a href="generators.html" class="active">Generators</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="product-container">
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="index.html">Home</a> / <a href="generators.html">Generators</a> / Household Generator
+  </nav>
+
+  <!-- Product Main Section -->
+  <div class="product-main" x-data="productPage()">
+    <div class="product-gallery">
+      <img :src="currentImage" alt="Household Generator" class="main-image glightbox">
+      <div class="thumbnails">
+        <img v-for="(image, index) in images" :src="image" :alt="'View ' + (index + 1)" class="thumbnail" :class="{ active: index === currentIndex }" @click="setImage(index)">
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1 x-text="product.name"></h1>
+      <div class="product-price" x-text="formatPrice(product.price)"></div>
+      <p class="product-tagline" x-text="product.tagline"></p>
+
+      <div class="purchase-options">
+        <div class="quantity-section">
+          <span class="quantity-label">Select Quantity</span>
+          <div class="quantity-controls">
+            <button class="quantity-btn" @click="decrementQuantity">-</button>
+            <input type="number" class="quantity-input" x-model="quantity" min="1" max="10">
+            <button class="quantity-btn" @click="incrementQuantity">+</button>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button @click="buyNow" class="btn-buy-now">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            Buy Now
+          </button>
+          <button class="btn-add-cart" @click="addToCart">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Details Section -->
+  <div class="product-details" x-data="productDetails">
+    <div class="product-details-header">
+      <h2>Product Information</h2>
+      <p>Comprehensive details about our premium Household Generator</p>
+    </div>
+    
+    <div class="detail-section">
+      <div class="detail-header" @click="toggleSection('description')">
+        Product Description
+        <span class="detail-toggle" :class="{ rotated: activeSections.description }">▼</span>
+      </div>
+      <div class="detail-content" :class="{ active: activeSections.description }">
+        <div x-show="product">
+          <div x-html="product.description"></div>
+        </div>
+        <div x-show="!product">
+          <p>Product details are not available.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-header" @click="toggleSection('specs')">
+        Technical Specifications
+        <span class="detail-toggle" :class="{ rotated: activeSections.specs }">▼</span>
+      </div>
+      <div class="detail-content" :class="{ active: activeSections.specs }">
+        <div x-show="product && product.specs">
+          <ul>
+            <template x-for="(spec, i) in product.specs" :key="i">
+              <li x-html="spec"></li>
+            </template>
+          </ul>
+        </div>
+        <div x-show="!product || !product.specs">
+          <p>Technical specifications will be provided soon.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-header" @click="toggleSection('features')">
+        Features & Benefits
+        <span class="detail-toggle" :class="{ rotated: activeSections.features }">▼</span>
+      </div>
+      <div class="detail-content" :class="{ active: activeSections.features }">
+        <div x-show="product && product.features">
+          <ul>
+            <template x-for="(f, i) in product.features" :key="i">
+              <li x-html="f"></li>
+            </template>
+          </ul>
+        </div>
+        <div x-show="!product || !product.features">
+          <p>Feature details will be provided soon.</p>
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Related Products -->
+  <section class="related-products">
+    <div class="product-details-header">
+      <h2>You Might Also Like</h2>
+      <p>Explore our other power solutions tailored to different needs</p>
+    </div>
+    <div class="related-grid">
+      <div class="related-card">
+        <div class="related-card-image">
+          <img src="images/generators/small-unit.jpg" alt="Compact Backup Unit">
+          <div class="related-card-badge">Popular</div>
+        </div>
+        <div class="related-card-content">
+          <h3>Compact Backup Unit</h3>
+          <p>3 kW – 8 kW | Perfect for residential use</p>
+          <a href="generator.html?id=compact" class="related-card-btn">View Details</a>
+        </div>
+      </div>
+      <div class="related-card">
+        <div class="related-card-image">
+          <img src="images/generators/medium-unit.jpg" alt="Commercial Generator">
+          <div class="related-card-badge">Best Seller</div>
+        </div>
+        <div class="related-card-content">
+          <h3>Commercial Generator</h3>
+          <p>50 kW – 150 kW | For offices and shops</p>
+          <a href="generator.html?id=commercial" class="related-card-btn">View Details</a>
+        </div>
+      </div>
+      <div class="related-card">
+        <div class="related-card-image">
+          <img src="images/generators/industrial-unit.jpg" alt="Heavy Duty Generator">
+        </div>
+        <div class="related-card-content">
+          <h3>Heavy Duty Generator</h3>
+          <p>240 kW – 500 kW | Industrial applications</p>
+          <a href="generator.html?id=heavy-duty" class="related-card-btn">View Details</a>
+        </div>
+      </div>
+      <div class="related-card">
+        <div class="related-card-image">
+          <img src="images/generators/custom.jpg" alt="Tailored Power Solution">
+          <div class="related-card-badge">Custom</div>
+        </div>
+        <div class="related-card-content">
+          <h3>Tailored Power Solution</h3>
+          <p>Custom up to 5 MW | Bespoke design</p>
+          <a href="generator.html?id=tailored" class="related-card-btn">View Details</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Cart Notification -->
+<div id="cartNotification" class="cart-notification" style="display: none;">
+  <div class="notification-content">
+    <span class="notification-icon">✓</span>
+    <span>Added to cart successfully!</span>
+    <a href="cart.html" class="view-cart-link">View Cart</a>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="footer-container">
+    <!-- Contact Info -->
+    <div class="footer-section contact-info">
+      <h4>Contact Us</h4>
+      <p>
+        <a href="tel:+2347035589713" class="footer-link">
+          <img src="images/phone.svg" alt="Phone" /> +234 703 558 9713
+        </a><br>
+        <a href="mailto:folsmeinternational@gmail.com" class="footer-link">
+          <img src="images/email.svg" alt="Email" /> folsmeinternational@gmail.com
+        </a><br>
+        <a href="https://goo.gl/maps/xxxx" target="_blank" class="footer-link">
+          <img src="images/location.svg" alt="Location" /> Head Office: Osogbo | Mining Site: Erio-Ekiti
+        </a>
+      </p>
+    </div>
+
+    <div class="footer-row1">
+      <!-- Navigation Links -->
+      <div class="footer-section footer-nav">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="about.html" class="footer-link">About Us</a></li>
+          <li><a href="services.html" class="footer-link">Services</a></li>
+          <li><a href="#why-choose-us" class="footer-link">Why Choose Us</a></li>
+          <li><a href="contact.html" class="footer-link">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Services Links -->
+      <div class="footer-section footer-services">
+        <h4>Our Services</h4>
+        <ul>
+          <li><a href="services.html#mining" class="footer-link">Mining & Minerals</a></li>
+          <li><a href="energy.html" class="footer-link">Energy & Engineering</a></li>
+          <li><a href="construction.html" class="footer-link">Construction</a></li>
+          <li><a href="logistics.html" class="footer-link">Logistics</a></li>
+          <li><a href="oilgas.html" class="footer-link">Oil & Gas</a></li>
+          <li><a href="trade.html" class="footer-link">Trade & Commerce</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-row2">
+      <!-- Follow Us -->
+      <div class="footer-section footer-extra">
+        <h4>Follow Us</h4>
+        <p class="footer-socials">
+          <a href="https://wa.me/2347035589713" target="_blank" class="footer-link">
+            <img src="images/whatsapp.svg" alt="WhatsApp" />
+          </a>
+          <a href="#" target="_blank" class="footer-link">
+            <img src="images/linkedin.svg" alt="LinkedIn" />
+          </a>
+          <a href="#" target="_blank" class="footer-link">
+            <img src="images/facebook.svg" alt="Facebook" />
+          </a>
+        </p>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="footer-section footer-newsletter-section">
+        <h4>Newsletter</h4>
+        <form class="footer-newsletter">
+          <input type="email" placeholder="Your email address" required />
+          <button type="submit">Subscribe</button>
+        </form>
+        <p class="newsletter-note">We respect your privacy. Your data is secure with us.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 FOLSME International. All Rights Reserved. Designed by Seyi Olofin</p>
+  </div>
+</footer>
+
+<script>
+  const products = {
+    household: {
+      name: 'Household Generator',
+      price: 2500000,
+      tagline: 'Reliable power for your home and small office needs',
+      images: ['images/generators/small-unit.jpeg', 'images/generators/small-unit.jpg'],
+      description: 'Our Household Generator is the ultimate solution for uninterrupted power supply in residential and small commercial settings. Engineered with cutting-edge technology, this generator provides reliable backup power during outages, ensuring your essential appliances continue to function seamlessly. Whether it\'s keeping your lights on, your refrigerator running, or your security systems operational, this generator delivers peace of mind when you need it most.<br><br>Featuring advanced noise reduction technology, it operates at levels comparable to a quiet conversation, making it perfect for residential neighborhoods. The fuel-efficient design ensures maximum runtime while minimizing operational costs. With automatic voltage regulation and overload protection, your valuable electronics are always safe. Available in both diesel and petrol variants to match your fuel preferences and local availability.',
+      specs: [
+        '<strong>Power Output:</strong> 5 kW – 10 kW continuous (perfect for 2-4 bedroom homes, air conditioning, refrigerators, TVs, computers, and lighting)',
+        '<strong>Maximum Power:</strong> 5.5 kW – 11 kW (surge capacity for motor starting)',
+        '<strong>Generator Type:</strong> Magnetic Generator (fuel-free, eco-friendly technology)',
+        '<strong>Phase:</strong> Single Phase (standard for residential use in Nigeria)',
+        '<strong>Voltage:</strong> 220V / 50Hz (Nigerian electrical standard)',
+        '<strong>Engine Type:</strong> 4-stroke, air-cooled, OHV (Overhead Valve) design for reliability',
+        '<strong>Engine Model:</strong> Single cylinder, 4-stroke, forced air cooling system',
+        '<strong>Starting System:</strong> Electric start with recoil backup (12V battery included)',
+        '<strong>Runtime:</strong> Continuous operation (no fuel required)',
+        '<strong>Run Time:</strong> 8-12 hours at 50% load, 4-6 hours at 100% load',
+        '<strong>Noise Level:</strong> ≤ 70 dB at 7 meters (quieter than conversation level)',
+        '<strong>Weight:</strong> 80-120 kg (includes wheels and handles for easy transport)',
+        '<strong>Dimensions:</strong> 650 x 480 x 550 mm (L x W x H, compact footprint)',
+        '<strong>Alternator Type:</strong> Brushless, self-exciting, synchronous alternator',
+        '<strong>Voltage Regulation:</strong> Automatic Voltage Regulator (AVR) ±5%',
+        '<strong>Protection Features:</strong> Overload, short circuit, low oil shutdown',
+        '<strong>Oil Capacity:</strong> 1.1 liters (SAE 10W-30 recommended)',
+        '<strong>Oil Alert System:</strong> Automatic shutdown when oil level is low',
+        '<strong>Cooling System:</strong> Forced air cooling with protective grille',
+        '<strong>Exhaust System:</strong> Muffler with spark arrestor for safety',
+        '<strong>Fuel Gauge:</strong> Transparent fuel tank with level indicator',
+        '<strong>Control Panel:</strong> Analog meters for voltage, frequency, and runtime',
+        '<strong>Outlets:</strong> 2x 220V sockets, 1x 12V DC outlet for battery charging',
+        '<strong>Cable Size:</strong> 4mm² recommended for 10kW output',
+        '<strong>Operating Temperature:</strong> -5°C to 40°C (suitable for Nigerian climate)',
+        '<strong>Storage Temperature:</strong> -20°C to 50°C (with proper preparation)',
+        '<strong>Warranty:</strong> 1 year manufacturer warranty + 2 years extended support',
+        '<strong>Certification:</strong> SONCAP certified, CE compliant, ISO 9001 quality assurance',
+        '<strong>Maintenance Interval:</strong> Oil change every 50 hours, general service every 100 hours',
+        '<strong>Installation:</strong> Plug-and-play design, professional installation recommended'
+      ],
+      features: [
+        '<strong>🔇 Ultra-Quiet Operation:</strong> Advanced muffler system with noise-dampening technology keeps sound levels below 70dB at 7 meters - quieter than a normal conversation, perfect for residential areas and won\'t disturb neighbors or family sleep',
+        '<strong>⛽ Superior Fuel Efficiency:</strong> Optimized engine design with advanced fuel injection system provides up to 10 hours of continuous runtime on a single tank, reducing fuel costs by up to 30% compared to traditional generators',
+        '<strong>🔧 Hassle-Free Maintenance:</strong> Easy-access service points with simple maintenance requirements - oil changes every 50 hours, air filter cleaning every 100 hours, all accessible without special tools',
+        '<strong>🚚 Effortless Portability:</strong> Built-in pneumatic wheels and ergonomic handles allow one person to move the generator easily, weighing only 80-120kg with foldable design for compact storage',
+        '<strong>⚡ Smart Automatic Features:</strong> Optional Automatic Transfer Switch (ATS) integration enables seamless power switching - automatically detects power failure and starts generator within 10 seconds',
+        '<strong>🛡️ Advanced Protection Systems:</strong> Multi-layer protection including overload protection, short-circuit prevention, low oil shutdown, overheat protection, and surge suppression to safeguard your valuable electronics and appliances',
+        '<strong>⏰ Extended Runtime Capability:</strong> Large-capacity fuel tank (15-25L) with efficient consumption rates ensures 8-12 hours of continuous operation at 50% load, perfect for extended outages',
+        '<strong>🏗️ Military-Grade Durability:</strong> Heavy-duty steel frame with powder-coated finish, premium components, and weather-resistant design built to withstand Nigerian climate conditions and rough handling',
+        '<strong>📱 Digital Monitoring Display:</strong> Optional LCD display panel shows real-time data including runtime hours, fuel level, voltage output, frequency, oil pressure, and maintenance alerts with error codes',
+        '<strong>🌱 Environmentally Conscious:</strong> Low-emission engine design meets international environmental standards, reduced carbon footprint, and catalytic converter option available for ultra-clean operation',
+        '<strong>💰 Cost-Effective Ownership:</strong> Low fuel consumption (1.2-2.5L/hour), extended service intervals, and high-efficiency design result in total cost of ownership savings of up to 40% over 5 years',
+        '<strong>🔄 Unmatched Reliability:</strong> Proven technology with redundant systems, backup safety mechanisms, and quality components ensure 99.5% uptime reliability for critical applications',
+        '<strong>🔌 Multiple Power Outlets:</strong> Versatile output options including 2x 220V AC sockets, 1x 12V DC outlet for battery charging, and optional 3-phase output capability for commercial applications',
+        '<strong>🌡️ Climate Adaptation:</strong> Designed for extreme temperatures (-5°C to 40°C operating range), perfect for Nigerian weather conditions from harmattan cold to tropical heat',
+        '<strong>🛠️ Professional Installation Support:</strong> Comprehensive installation guide included, professional installation services available, and on-site commissioning to ensure optimal performance',
+        '<strong>📞 24/7 Technical Support:</strong> Round-the-clock technical support hotline, online troubleshooting guides, and nationwide service network for peace of mind',
+        '<strong>🔄 Easy Scalability:</strong> Modular design allows for future upgrades, additional features can be added, and parallel operation capability for increased power requirements',
+        '<strong>📊 Performance Tracking:</strong> Built-in hour meter for maintenance scheduling, fuel consumption tracking, and performance analytics to optimize usage patterns'
+      ]
+    },
+    compact: {
+      name: 'Compact Backup Unit',
+      price: 1800000,
+      tagline: 'Lightweight and efficient for small spaces',
+      images: ['images/generators/small-unit.jpg'],
+      description: 'Perfect for residential use and small businesses requiring reliable backup power.',
+      specs: ['Power Output: 3 kW – 8 kW', 'Magnetic Generator Technology', 'Lightweight', 'Low noise', 'Automatic start', 'Continuous runtime'],
+      features: ['Lightweight', 'Low noise', 'Automatic start', 'Long runtime']
+    },
+    commercial: {
+      name: 'Commercial Generator',
+      price: 8500000,
+      tagline: 'High-efficiency power for commercial buildings',
+      images: ['images/generators/medium-unit.jpg'],
+      description: 'Suitable for offices, shops, and medium industries.',
+      specs: ['Power Output: 50 kW – 150 kW', 'Magnetic Generator Technology', 'High efficiency', 'Remote monitoring', 'Durable build', 'Scalable capacity'],
+      features: ['High efficiency', 'Remote monitoring', 'Durable build', 'Scalable capacity']
+    },
+    business: {
+      name: 'Business Power Unit',
+      price: 7200000,
+      tagline: 'Reliable power for business operations',
+      images: ['images/generators/medium-unit.jpeg'],
+      description: 'Designed for commercial buildings and small factories.',
+      specs: ['Power Output: 60 kW – 120 kW', 'Magnetic Generator Technology', 'Reliable performance', 'Zero emissions', 'Easy installation', '24/7 support'],
+      features: ['Reliable performance', 'Low emissions', 'Easy installation', '24/7 support']
+    },
+    'heavy-duty': {
+      name: 'Heavy Duty Generator',
+      price: 15000000,
+      tagline: 'Industrial-grade power for demanding applications',
+      images: ['images/generators/industrial-unit.jpg'],
+      description: 'Built for large factories, data centers, and heavy industry.',
+      specs: ['Power Output: 240 kW – 500 kW', 'Magnetic Generator Technology', 'Industrial grade', 'Continuous operation', 'Advanced cooling', 'Redundant systems'],
+      features: ['Industrial grade', 'Continuous operation', 'Advanced cooling', 'Redundant systems']
+    },
+    factory: {
+      name: 'Factory Power System',
+      price: 25000000,
+      tagline: 'High-capacity power for manufacturing plants',
+      images: ['images/generators/industrial-unit.jpeg'],
+      description: 'Essential for manufacturing plants and large operations.',
+      specs: ['Power Output: 300 kW – 1 MW', 'Magnetic Generator Technology', 'High capacity', 'Modular design', 'Smart controls', 'Energy efficient'],
+      features: ['High capacity', 'Modular design', 'Smart controls', 'Energy efficient']
+    },
+    tailored: {
+      name: 'Tailored Power Solution',
+      price: 0, // Custom pricing
+      tagline: 'Bespoke power solutions for unique needs',
+      images: ['images/generators/custom.jpg'],
+      description: 'Custom-built for unique industrial and commercial needs.',
+      specs: ['Power Output: Custom (up to 5 MW)', 'Magnetic Generator Technology', 'Bespoke design', 'Integrated systems', 'Specialized features', 'Expert consultation'],
+      features: ['Bespoke design', 'Integrated systems', 'Specialized features', 'Expert consultation']
+    },
+    specialized: {
+      name: 'Specialized Energy Unit',
+      price: 0, // Custom pricing
+      tagline: 'Advanced technology for specialized applications',
+      images: ['images/generators/custom.jpeg'],
+      description: 'Designed for specialized industrial applications.',
+      specs: ['Power Output: Custom Specifications', 'Magnetic Generator Technology', 'Application specific', 'Advanced technology', 'Custom integration', 'Performance optimized'],
+      features: ['Application specific', 'Advanced technology', 'Custom integration', 'Performance optimized']
+    }
+  };
+
+  function productPage() {
+    return {
+      quantity: 1,
+      currentIndex: 0,
+      activeSections: {
+        description: false,
+        specs: false,
+        features: false
+      },
+      product: null,
+      cartCount: 0,
+
+      init() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id') || 'household';
+        this.product = products[productId] || products.household;
+
+        // Update page title
+        document.title = this.product.name + ' | FOLSME International';
+
+        // Update breadcrumb
+        const breadcrumb = document.querySelector('.breadcrumb');
+        if (breadcrumb) {
+          breadcrumb.innerHTML = '<a href="index.html">Home</a> / <a href="generators.html">Generators</a> / ' + this.product.name;
+        }
+
+        // Load initial cart count
+        this.updateCartCount();
+      },
+
+      get images() {
+        return this.product ? this.product.images : [];
+      },
+
+      get currentImage() {
+        return this.images[this.currentIndex];
+      },
+
+      setImage(index) {
+        this.currentIndex = index;
+      },
+
+      incrementQuantity() {
+        if (this.quantity < 10) this.quantity++;
+      },
+
+      decrementQuantity() {
+        if (this.quantity > 1) this.quantity--;
+      },
+
+      toggleSection(section) {
+        this.activeSections[section] = !this.activeSections[section];
+      },
+
+      addToCart() {
+        const cartItem = {
+          id: new URLSearchParams(window.location.search).get('id') || 'household',
+          name: this.product.name,
+          price: this.product.price,
+          quantity: this.quantity,
+          image: this.product.images[0],
+          description: this.product.tagline
+        };
+
+        // Get existing cart from localStorage
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+        // Check if item already exists in cart
+        const existingItemIndex = cart.findIndex(item => item.id === cartItem.id);
+
+        if (existingItemIndex > -1) {
+          // Update quantity if item exists
+          cart[existingItemIndex].quantity += this.quantity;
+        } else {
+          // Add new item to cart
+          cart.push(cartItem);
+        }
+
+  // Save cart to localStorage
+  localStorage.setItem('cart', JSON.stringify(cart));
+
+  // Update any page-level counters and global header badge
+  this.updateCartCount();
+  if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
+
+        // Show success message with animation
+        this.showCartNotification();
+
+        // TODO: Send to backend API for persistence
+        // fetch('/api/cart/add', {
+        //   method: 'POST',
+        //   headers: { 'Content-Type': 'application/json' },
+        //   body: JSON.stringify(cartItem)
+        // });
+      },
+
+      showCartNotification() {
+        // Update cart count
+        this.updateCartCount();
+
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.className = 'cart-notification';
+        notification.innerHTML = `
+          <div class="notification-content">
+            <span class="notification-icon">✓</span>
+            <span>Added to cart successfully!</span>
+            <a href="cart.html" class="view-cart-link">View Cart</a>
+          </div>
+        `;
+
+        // Add styles
+        notification.style.cssText = `
+          position: fixed;
+          top: 100px;
+          right: 20px;
+          background: #28a745;
+          color: white;
+          padding: 15px 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+          z-index: 1000;
+          transform: translateX(100%);
+          transition: transform 0.3s ease;
+          font-weight: 600;
+        `;
+
+        document.body.appendChild(notification);
+
+        // Animate in
+        setTimeout(() => {
+          notification.style.transform = 'translateX(0)';
+        }, 100);
+
+        // Remove after 3 seconds
+        setTimeout(() => {
+          notification.style.transform = 'translateX(100%)';
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 3000);
+      },
+
+      formatPrice(price) {
+        if (price === 0) return 'Contact for Quote';
+        return '₦' + price.toLocaleString();
+      },
+
+      updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        this.cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+        // keep header in sync
+        if (window.updateGlobalCartBadge) window.updateGlobalCartBadge();
+      },
+      
+      buyNow() {
+        // Get the current product ID from URL or default to household
+        const productId = new URLSearchParams(window.location.search).get('id') || 'household';
+        
+        // Add the product to cart first
+        this.addToCart();
+        
+        // Navigate to cart page
+        window.location.href = 'cart.html';
+      }
+    }
+  }
+
+  // Initialize Alpine.js data for product details dropdowns
+  document.addEventListener('alpine:init', () => {
+    Alpine.data('productDetails', () => ({
+      // product object will be populated from URL parameter
+      product: null,
+      activeSections: {
+        description: false,
+        specs: false,
+        features: false
+      },
+      init() {
+        try {
+          const urlParams = new URLSearchParams(window.location.search);
+          const productId = urlParams.get('id') || 'household';
+          this.product = (window.products && window.products[productId]) ? window.products[productId] : (products[productId] || products.household);
+        } catch (e) {
+          this.product = products.household;
+        }
+      },
+      toggleSection(section) {
+        this.activeSections[section] = !this.activeSections[section];
+      }
+    }));
+  });
+
+  // GLightbox
+  const lightbox = GLightbox({
+    selector: '.glightbox',
+    touchNavigation: true,
+    loop: true,
+    zoomable: true,
+    autoplayVideos: false,
+    closeButton: true,
+    openEffect: 'zoom',
+    closeEffect: 'fade',
+    slideEffect: 'slide',
+  });
+
+  // GSAP Animations
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from(".product-main", {
+    duration: 1,
+    y: 50,
+    opacity: 0,
+    ease: "power3.out"
+  });
+
+  gsap.from(".related-products", {
+    scrollTrigger: {
+      trigger: ".related-products",
+      start: "top 80%"
+    },
+    y: 50,
+    opacity: 0,
+    duration: 1,
+    ease: "power3.out"
+  });
+</script>
+
+
+
+<script src="script.js"></script>
+</body>
+</html>
