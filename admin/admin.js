@@ -339,19 +339,25 @@ document.addEventListener('DOMContentLoaded', function() {
       const products = await productsRes.json();
       const wallets = await walletsRes.json();
 
-      // Calculate stats
+      // Calculate real stats
       const totalOrders = orders.items?.length || 0;
       const totalRevenue = orders.items?.reduce((sum, order) => sum + (order.amount || 0), 0) || 0;
-      const pendingOrders = orders.items?.filter(order => order.status === 'pending').length || 0;
+      const pendingOrders = orders.items?.filter(order => order.status === 'pending' || order.status === 'processing').length || 0;
       const totalProducts = products.items?.length || 0;
+      const totalWallets = wallets.items?.length || 0;
 
-      // Update UI
+      // Update UI with real data
       document.getElementById('stat-orders').textContent = totalOrders;
       document.getElementById('stat-revenue').textContent = `₦${totalRevenue.toLocaleString()}`;
       document.getElementById('stat-pending').textContent = pendingOrders;
-      document.getElementById('stat-customers').textContent = totalProducts; // Using products as proxy for now
+      document.getElementById('stat-customers').textContent = totalWallets; // Using wallets as proxy for active customers
     } catch (error) {
       console.warn('Failed to load stats:', error);
+      // Show zeros instead of dummy data
+      document.getElementById('stat-orders').textContent = '0';
+      document.getElementById('stat-revenue').textContent = '₦0';
+      document.getElementById('stat-pending').textContent = '0';
+      document.getElementById('stat-customers').textContent = '0';
     }
   }
 
@@ -1017,24 +1023,34 @@ document.addEventListener('DOMContentLoaded', function() {
   // Content Management Functions
   async function loadAnalyticsData() {
     try {
-      // Load analytics metrics
+      // Load real analytics metrics
       const baseUrl = getApiBaseUrl();
       const orders = await fetch(`${baseUrl}/api/admin/orders`).then(r => r.json());
       const products = await fetch(`${baseUrl}/api/admin/products`).then(r => r.json());
+      const wallets = await fetch(`${baseUrl}/api/admin/wallets`).then(r => r.json());
 
       const totalSales = orders.items?.length || 0;
       const totalRevenue = orders.items?.reduce((sum, order) => sum + (order.amount || 0), 0) || 0;
       const uniqueCustomers = new Set(orders.items?.map(order => order.customer?.email).filter(Boolean)).size || 0;
+      const totalWallets = wallets.items?.length || 0;
+
+      // Calculate conversion rate based on real data
+      const conversionRate = totalSales > 0 ? ((totalSales / Math.max(totalWallets, 1)) * 100).toFixed(1) + '%' : '0%';
 
       document.getElementById('analytics-total-sales').textContent = totalSales;
       document.getElementById('analytics-revenue').textContent = `₦${totalRevenue.toLocaleString()}`;
       document.getElementById('analytics-customers').textContent = uniqueCustomers;
-      document.getElementById('analytics-conversion').textContent = '94.2%';
+      document.getElementById('analytics-conversion').textContent = conversionRate;
 
-      // Load sales activity
+      // Load real sales activity
       loadSalesActivity(orders.items || []);
     } catch (error) {
       console.warn('Failed to load analytics data:', error);
+      // Show zeros instead of dummy data
+      document.getElementById('analytics-total-sales').textContent = '0';
+      document.getElementById('analytics-revenue').textContent = '₦0';
+      document.getElementById('analytics-customers').textContent = '0';
+      document.getElementById('analytics-conversion').textContent = '0%';
     }
   }
 
@@ -1227,176 +1243,24 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function loadDummyData() {
-    // Load dummy data for demonstration
-    setTimeout(() => {
-      // Update stats with dummy data
-      document.getElementById('stat-orders').textContent = '47';
-      document.getElementById('stat-revenue').textContent = '₦12,450,000';
-      document.getElementById('stat-pending').textContent = '8';
-      document.getElementById('stat-customers').textContent = '156';
-
-      // Load dummy orders
-      loadDummyOrders();
-
-      // Load dummy products
-      loadDummyProducts();
-
-      // Load dummy wallets
-      loadDummyWallets();
-
-      // Load dummy activity
-      loadDummyActivity();
-
-      // Load dummy analytics
-      loadDummyAnalytics();
-
-      // Load dummy finance data
-      loadDummyFinance();
-    }, 500);
+    // Skip dummy data loading - use real data from API instead
+    // This function is kept for backward compatibility but doesn't load dummy data anymore
+    console.log('Using real data from backend API');
   }
 
-  function loadDummyOrders() {
-    const orders = [
-      { id: 1, reference: 'FS001', customer: { email: 'john.doe@example.com' }, amount: 2500000, status: 'completed', created_at: '2024-01-15T10:30:00Z' },
-      { id: 2, reference: 'FS002', customer: { email: 'sarah.smith@company.com' }, amount: 1800000, status: 'shipped', created_at: '2024-01-14T14:20:00Z' },
-      { id: 3, reference: 'FS003', customer: { email: 'mike.johnson@business.ng' }, amount: 8500000, status: 'pending', created_at: '2024-01-13T09:15:00Z' },
-      { id: 4, reference: 'FS004', customer: { email: 'emily.davis@corp.com' }, amount: 7200000, status: 'completed', created_at: '2024-01-12T16:45:00Z' },
-      { id: 5, reference: 'FS005', customer: { email: 'robert.wilson@enterprise.ng' }, amount: 15000000, status: 'shipped', created_at: '2024-01-11T11:30:00Z' }
-    ];
+  // Removed loadDummyOrders - now using real data from loadOrders()
 
-    const tbody = document.getElementById('orders-tbody');
-    tbody.innerHTML = '';
+  // Removed loadDummyProducts - now using real data from loadProducts()
 
-    orders.forEach(order => {
-      const row = createOrderRow(order);
-      tbody.appendChild(row);
-    });
-  }
+  // Removed loadDummyWallets - now using real data from loadWallets()
 
-  function loadDummyProducts() {
-    const products = [
-      { id: 1, name: 'Household Generator 5KVA', price_cents: 250000000, description: 'Reliable backup power for homes' },
-      { id: 2, name: 'Compact Backup Unit 3KVA', price_cents: 180000000, description: 'Portable generator for small businesses' },
-      { id: 3, name: 'Commercial Generator 15KVA', price_cents: 850000000, description: 'Heavy-duty power for commercial use' },
-      { id: 4, name: 'Business Power Unit 12KVA', price_cents: 720000000, description: 'Industrial-grade generator' },
-      { id: 5, name: 'Heavy Duty Generator 25KVA', price_cents: 1500000000, description: 'Maximum power output generator' }
-    ];
+  // Removed loadDummyTransactions - now using real data from loadTransactionHistory()
 
-    const grid = document.getElementById('products-grid');
-    grid.innerHTML = '';
+  // Removed loadDummyActivity - now using real data from loadRecentActivity()
 
-    products.forEach(product => {
-      const card = createProductCard(product);
-      grid.appendChild(card);
-    });
-  }
+  // Removed loadDummyAnalytics - now using real data from loadAnalyticsData()
 
-  function loadDummyWallets() {
-    const wallets = [
-      { id: 1, owner: 'John Doe', balance: 50000000, created_at: '2024-01-01T00:00:00Z' },
-      { id: 2, owner: 'Sarah Smith', balance: 75000000, created_at: '2024-01-05T00:00:00Z' },
-      { id: 3, owner: 'Mike Johnson', balance: 25000000, created_at: '2024-01-10T00:00:00Z' }
-    ];
-
-    // Update wallet overview
-    const overview = document.querySelector('.wallets-container .wallet-overview') || document.createElement('div');
-    overview.innerHTML = '<h3>Wallet Overview</h3>';
-
-    wallets.forEach(wallet => {
-      const card = createWalletCard(wallet);
-      overview.appendChild(card);
-    });
-
-    // Load transaction history for first wallet
-    loadDummyTransactions(wallets[0].id);
-  }
-
-  function loadDummyTransactions(walletId) {
-    const transactions = [
-      { id: 1, description: 'Deposit - Generator Sale', amount: 25000000, type: 'deposit', created_at: '2024-01-15T10:30:00Z' },
-      { id: 2, description: 'Withdrawal - Equipment Purchase', amount: 5000000, type: 'withdraw', created_at: '2024-01-14T14:20:00Z' },
-      { id: 3, description: 'Deposit - Mineral Sale', amount: 18000000, type: 'deposit', created_at: '2024-01-13T09:15:00Z' },
-      { id: 4, description: 'Deposit - Service Revenue', amount: 12000000, type: 'deposit', created_at: '2024-01-12T16:45:00Z' }
-    ];
-
-    const history = document.querySelector('.wallets-container .transactions-history') || document.createElement('div');
-    history.innerHTML = '<h3>Transaction History</h3>';
-
-    transactions.forEach(transaction => {
-      const item = createTransactionItem(transaction);
-      history.appendChild(item);
-    });
-  }
-
-  function loadDummyActivity() {
-    const activities = [
-      { id: 1, icon: '📦', title: 'New order received', description: 'Order #FS001 for ₦2,500,000', time: '2 hours ago' },
-      { id: 2, icon: '🚚', title: 'Order shipped', description: 'Order #FS002 has been shipped', time: '4 hours ago' },
-      { id: 3, icon: '💰', title: 'Payment received', description: '₦1,800,000 payment confirmed', time: '6 hours ago' },
-      { id: 4, icon: '👤', title: 'New customer registered', description: 'Emily Davis joined FOLSME', time: '1 day ago' },
-      { id: 5, icon: '📈', title: 'Monthly target achieved', description: 'December sales target exceeded by 15%', time: '2 days ago' }
-    ];
-
-    const list = document.getElementById('recent-activity-list');
-    list.innerHTML = '';
-
-    activities.forEach(activity => {
-      const item = createActivityItem(activity);
-      list.appendChild(item);
-    });
-  }
-
-  function loadDummyAnalytics() {
-    // Update analytics metrics
-    document.getElementById('analytics-total-sales').textContent = '156';
-    document.getElementById('analytics-customers').textContent = '89';
-    document.getElementById('analytics-revenue').textContent = '₦45,200,000';
-    document.getElementById('analytics-conversion').textContent = '94.2%';
-
-    // Load sales activity
-    const orders = [
-      { id: 1, reference: 'FS001', amount: 2500000, created_at: '2024-01-15T10:30:00Z' },
-      { id: 2, reference: 'FS002', amount: 1800000, created_at: '2024-01-14T14:20:00Z' }
-    ];
-    loadSalesActivity(orders);
-  }
-
-  function loadDummyFinance() {
-    // Update finance overview
-    document.getElementById('totalBalance').textContent = '₦152,500,000';
-    document.getElementById('monthlyDeposits').textContent = '₦67,200,000';
-    document.getElementById('pendingApprovals').textContent = '3';
-
-    // Load dummy transactions
-    const transactions = [
-      { id: 1, description: 'Generator Sale - John Doe', amount: 25000000, type: 'deposit', created_at: '2024-01-15T10:30:00Z' },
-      { id: 2, description: 'Mineral Export - ABC Corp', amount: 45000000, type: 'deposit', created_at: '2024-01-14T14:20:00Z' },
-      { id: 3, description: 'Equipment Purchase', amount: 8500000, type: 'withdraw', created_at: '2024-01-13T09:15:00Z' },
-      { id: 4, description: 'Service Revenue - XYZ Ltd', amount: 32000000, type: 'deposit', created_at: '2024-01-12T16:45:00Z' },
-      { id: 5, description: 'Office Supplies', amount: 1200000, type: 'withdraw', created_at: '2024-01-11T11:30:00Z' }
-    ];
-
-    const list = document.querySelector('.transactions-list') || document.createElement('div');
-    list.innerHTML = '';
-
-    transactions.forEach(transaction => {
-      const item = document.createElement('div');
-      item.className = 'transaction-item';
-
-      const amountClass = transaction.type === 'deposit' ? 'positive' : 'negative';
-      const amountPrefix = transaction.type === 'deposit' ? '+' : '-';
-
-      item.innerHTML = `
-        <div class="transaction-info">
-          <div class="transaction-type">${transaction.description}</div>
-          <div class="transaction-desc">${new Date(transaction.created_at).toLocaleDateString()}</div>
-        </div>
-        <div class="transaction-amount ${amountClass}">${amountPrefix}₦${(transaction.amount / 100).toLocaleString()}</div>
-      `;
-
-      list.appendChild(item);
-    });
-  }
+  // Removed loadDummyFinance - finance data now comes from real wallet transactions
 
   function showToast(message, type = 'info') {
     const toast = document.createElement('div');
